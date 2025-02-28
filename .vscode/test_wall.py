@@ -12,6 +12,9 @@ WAND_CM2WINKELVERTIKAL = -74
 WAND_CM2WINKELSEITLICH = 74
 
 
+class Wall():
+    pass
+
 wand_startposition_vertikal_cm = 0.0
 
 async def wand_vertikal_ausrichten():
