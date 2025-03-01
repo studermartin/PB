@@ -1,18 +1,16 @@
-from pybricks.hubs import PrimeHub
 from pybricks.tools import wait
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
-from pybricks.parameters import Axis
 from pybricks import version
+from drive import *
 
 print(version)
-
-hub = PrimeHub(top_side=Axis.Z, front_side=Axis.Y)
 
 
 print(hub.imu.settings())
 hub.imu.settings(angular_velocity_threshold=1, acceleration_threshold=1000)
+# hub.imu.settings(heading_correction=361)
 print(hub.imu.settings())
 
 

@@ -28,8 +28,8 @@ for i in range(10):
     time = watch.time()
     print("Zeit [ms]: " + str(time))
 
-motor_A = Motor(Port.A)
-motor_A.run_time(100, 5000)
+# motor_A = Motor(Port.A)
+# motor_A.run_time(100, 5000)
 
 for i in range(40):
 
