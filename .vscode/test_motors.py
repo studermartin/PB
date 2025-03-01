@@ -7,6 +7,6 @@ from pybricks.parameters import Port
 # Initialize the hub.
 hub = PrimeHub()
 
-motor_A = Motor(Port.B)
-motor_A.run_time(100, 5000)
+motor = Motor(Port.C)
+motor.run_time(100, 2000)
 

@@ -30,16 +30,20 @@ drive_base.settings(turn_rate=50)
 wait(2000)
 
 # Drive forward by 500mm (half a meter).
-drive_base.straight(100, then=Stop.HOLD)
-hub.speaker.beep(500)
-for i in range(10):
+drive_base.straight(500, then=Stop.HOLD, wait=False)
+while not drive_base.stalled():
+    wait(500)
+drive_base.stop()
+
+hub.speaker.beep(200)
+for i in range(2):
     heading = hub.imu.heading()
 
     print("Heading [Grad]: " + str(heading))
     wait(1000)
 
 
-wait(2000)
+wait(1000)
 
 
 # Turn around clockwise by 180 degrees.
@@ -55,7 +59,7 @@ drive_base.use_gyro(True)
 
 # Drive forward again to get back to the start.
 drive_base.straight(100, then=Stop.HOLD)
-for n in range(10):
+for n in range(2):
 
     heading = hub.imu.heading()
 
@@ -66,7 +70,7 @@ for n in range(10):
     wait(1000)
 
 
-wait(2000)
+wait(1000)
 
 # Turn around counterclockwise.
 wait(500)

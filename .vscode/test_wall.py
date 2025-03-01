@@ -1,20 +1,87 @@
+import umath
+from pybricks.tools import wait
 from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction
 from pybricks.robotics import DriveBase
+from pybricks.hubs import PrimeHub
 
 hub = PrimeHub()
 
-motor_vertical = Motor(Port.A, Direction.COUNTERCLOCKWISE)
-motor_horizontal = Motor(Port.B, Direction.COUNTERCLOCKWISE)
+# Aus dem Winkel in Grad muss die Strecke berechnet werden.
+# Der Radius des Rades ist 7.5 mm.
+VERTICAL_RADIUS = 7.8
+VERTIKAL_WINKEL2STRECKE = 2*umath.pi/360*VERTICAL_RADIUS    # mm/deg 
+VERTIKALE_GESCHWINDIGKEIT = 1/VERTIKAL_WINKEL2STRECKE # deg/mm
+VERTICAL_STANDARD_GESCHWINDIGKEIT = 30*VERTIKALE_GESCHWINDIGKEIT    # deg/mm
 
-WAND_CM2WINKELVERTIKAL = -74
-WAND_CM2WINKELSEITLICH = 74
+HORIZONTAL_RADIUS = 1.0
+HORIZONTAL_WINKEL2STRECKE = 2*umath.pi/360*HORIZONTAL_RADIUS    # mm/deg 
+HORIZONTAL_GESCHWINDIGKEIT = 1/HORIZONTAL_WINKEL2STRECKE # deg/mm
+HORIZONTAL_STANDARD_GESCHWINDIGKEIT = 30*HORIZONTAL_GESCHWINDIGKEIT    # deg/mm
 
 
-class Wall():
-    pass
+class Wall:
 
+    def __init__(self):
+        self.motor_vertical = Motor(Port.D, Direction.COUNTERCLOCKWISE)
+        self.motor_horizontal = Motor(Port.C, Direction.COUNTERCLOCKWISE)
+        self.reset_pos()
+
+    def reset_pos(self):
+        self.motor_vertical.reset_angle(0)
+        self.motor_horizontal.reset_angle(0)
+
+    def up(self, distance:float, VERTIKAL_WINKEL2STRECKE:float, wait:bool=True):
+        # print("Angle: ", self.motor_vertical.angle())
+
+        self.motor_vertical.run_angle(VERTICAL_STANDARD_GESCHWINDIGKEIT, distance/VERTIKAL_WINKEL2STRECKE, wait=wait)
+
+        # print("Angle: ", self.motor_vertical.angle())
+
+    def upTo(self,distance:float, wait:bool=True):
+        # print("Angle: ", self.motor_vertical.angle())
+
+        self.motor_vertical.run_target(VERTICAL_STANDARD_GESCHWINDIGKEIT, distance/VERTIKAL_WINKEL2STRECKE, wait=wait)
+    
+        # print("Angle: ", self.motor_vertical.angle())
+
+
+    def left(self, distance):
+        self.motor_horizontal.run_angle(HORIZONTAL_STANDARD_GESCHWINDIGKEIT, distance/HORIZONTAL_WINKEL2STRECKE)
+
+
+
+
+wall = Wall()
+
+def ausführen_wand_vertikal(self, distance_cm):
+    wall.up(VERTICAL_STANDARD_GESCHWINDIGKEIT, 10*distance_cm)
+
+def start_wand_vertikal(self, distance_cm):
+    wall.up(VERTICAL_STANDARD_GESCHWINDIGKEIT, 10*distance_cm, wait=False)
+
+def ausführen_wand_horizontal(self, distance_cm):
+    wall.left(VERTICAL_STANDARD_GESCHWINDIGKEIT, 10*distance_cm)
+
+
+wait(1000)
+wand.upTo(20, wait=False)
+hub.speaker.beep(500)
+wand.upTo(20)
+hub.speaker.beep(500)
+wand.upTo(40)
+hub.speaker.beep(500)
+wand.upTo(40)
+
+# wand.up(10)
+# wand.up(10)
+# wand.left(40)
+
+
+
+
+'''
 wand_startposition_vertikal_cm = 0.0
 
 async def wand_vertikal_ausrichten():
@@ -134,3 +201,4 @@ async def ausführen_wand_seitlich(cm: float):
         die Position in cm nach rechts; negative Werte nach links; -10.0 bis 10.0
     """
     await motor.run_to_relative_position(port.B, int(cm*WAND_CM2WINKELSEITLICH), 1000, stop=motor.HOLD)
+'''
