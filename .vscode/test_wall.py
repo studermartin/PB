@@ -11,6 +11,11 @@ from hub import *
 
 hub = PrimeHub()
 
+# wall.downToStop()
+# wait(2000)
+wall.center()
+
+
 # Up/Down
 # wait(1000)
 # wall.upTo(20, wait=False)
@@ -32,12 +37,22 @@ hub = PrimeHub()
 # ausführen_wand_vertikal(2)
 
 # Left/right
+
+
+# wall.right(20)
 # wait(1000)
-wall.left(80)
-wall.leftTo(80)
-wait_for_button_pressed()
-wall.rightTo(0)
+# wall.right()
+# wait(2000)
+# wall.left(20)
+# print("1")
+
+# wall.leftTo(40)
+# print("2")
+# wait_for_button_pressed()
+
+# print("3")
 # wall.leftTo(20)
+# print("4")
 # hub.speaker.beep(500)
 # wall.upTo(20)
 # hub.speaker.beep(500)

@@ -3,7 +3,6 @@ from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction
 from hub import hub
 from drive import drive
-from wall import wall
 
 
 
