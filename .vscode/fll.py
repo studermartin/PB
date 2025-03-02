@@ -1,18 +1,10 @@
 from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction
-from pybricks.robotics import DriveBase
+from hub import hub
+from drive import drive
+from wall import wall
 
-
-
-left_motor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
-right_motor = Motor(Port.D)
-
-drive_base = DriveBase(left_motor, right_motor, wheel_diameter=56, axle_track=112)
-
-drive_base.use_gyro(True)
-
-hub.speaker.beep(500)
 
 
 ##########################################################
@@ -29,3 +21,11 @@ def beepHigh():
 ##########################################################
 ### Wand
 ##########################################################
+
+
+
+
+##########################################################
+### Fahren
+##########################################################
+
