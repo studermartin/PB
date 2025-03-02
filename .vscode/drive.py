@@ -41,6 +41,11 @@ class Drive:
     def rotate_backward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         self.drive_base.curve(-AXLE_TRACK/2, angle, then=then, wait=wait)
 
+    def drive(self, distance:float, angle:float=0, then: Stop = Stop.HOLD, wait: bool=True):
+        if angle != 0:
+            self.turn(angle)
+        self.straigt(distance)
+
     def stop(self):
         self.drive_base.stop()
 

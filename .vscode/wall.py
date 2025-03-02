@@ -135,11 +135,17 @@ wall = Wall()
 def wand_initialisieren():
     wall.reset_pos()
 
-def ausführen_wand_vertikal(distance_cm:float):
+async def ausführen_wand_vertikal(distance_cm:float):
     wall.upTo(10*distance_cm)
 
 def start_wand_vertikal(distance_cm:float):
     wall.upTo(10*distance_cm, wait=False)
 
-def ausführen_wand_horizontal(distance_cm:float):
+async def ausführen_wand_horizontal(distance_cm:float):
     wall.leftTo(10*distance_cm)
+
+async def ausführen_wand_seitlich(distance_cm:float):
+    wall.leftTo(10*distance_cm)
+
+def start_wand_seitlich(distance_cm:float):
+    wall.leftTo(10*distance_cm, wait=False)

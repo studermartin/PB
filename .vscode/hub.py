@@ -8,4 +8,4 @@ def wait_for_button_pressed():
     pressed = []
     while not any(pressed):
         pressed = hub.buttons.pressed()
-        wait(10)
+        wait(100)
