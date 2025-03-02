@@ -11,11 +11,33 @@ from drive import *
 # drive.turn(-90)
 # drive.straigt(-100)
 
+# drive.rotate_forward(90)
+# wait(2000)
+# drive.rotate_forward(-90)
+# wait(2000)
+# run_task(drehe_auf(90, True, Raeder.RECHTS))
+# wait(2000)
+# run_task(drehe_auf(-90, True, Raeder.RECHTS))
+# wait(2000)
+# run_task(drehe_auf(90, True, Raeder.LINKS))
+# wait(2000)
+# run_task(drehe_auf(-90, True, Raeder.LINKS))
+
 wait(2000)
+run_task(drehe_auf(45, True, Raeder.LINKS))
+wait(2000)
+run_task(drehe_auf(-45, True, Raeder.LINKS))
+
 
 # run_task(gyro_fahren(10, 500))
 
-run_task(gyro_fahren_timeout(10, 500))
+# run_task(gyro_fahren_timeout(10, 500))
+
+# run_task(drehe_auf(90, True))
+# wait(2000)
+# run_task(drehe_auf(90, False))
+
+
 
 wait(10000)
 
