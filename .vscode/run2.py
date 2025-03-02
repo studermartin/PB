@@ -9,7 +9,7 @@ from fll import *
 from hub import *
 from wall import *
 
-def run1():
+def run2():
     wall.leftTo(-5*10, wait=False)
     wall.upTo(0, wait=False)
 
@@ -20,3 +20,4 @@ def run1():
     drive.drive(38.7*10, -2)
 
     wall.leftTo(7*10)
+

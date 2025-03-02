@@ -8,15 +8,6 @@ from drive import *
 from fll import *
 from hub import *
 from wall import *
+from run1 import run1
 
-def run1():
-    wall.leftTo(-5*10, wait=False)
-    wall.upTo(0, wait=False)
-
-    wait_for_button_pressed()
-
-    wall.leftTo(0, wait=False)
-    wall.upTo(8*10, wait=False)
-    drive.drive(38.7*10, -2)
-
-    wall.leftTo(7*10)
+run1()
