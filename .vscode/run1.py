@@ -10,13 +10,19 @@ from hub import *
 from wall import *
 
 def run1():
-    wall.leftTo(-5*10, wait=False)
-    wall.upTo(0, wait=False)
-
+    
+    # Artifical habitat
+    wait(500)
+    wall.upTo(15)
     wait_for_button_pressed()
+    wall.leftTo(20)
+    wait(500)
+    wall.leftTo(-5)
+    drive.turnToNull()
 
-    wall.leftTo(0, wait=False)
-    wall.upTo(8*10, wait=False)
-    drive.drive(38.7*10, -2)
+    drive.straigt(150, then=Stop.COAST)
+    # ToDo: Die Wand soll sich während dem Fahren bewegen. Man müsste also 2 Sekunden oder so warten
+    wall.leftTo(15, wait=False)
+    drive.straigt(255)
 
-    wall.leftTo(7*10)
+run1()

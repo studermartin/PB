@@ -7,7 +7,8 @@ from pybricks import version
 from drive import *
 from fll import *
 from hub import *
-from wall import *
 from run2 import run2
 
 run2()
+
+wait(20000)

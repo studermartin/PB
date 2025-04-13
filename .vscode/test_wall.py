@@ -13,16 +13,18 @@ hub = PrimeHub()
 
 # wall.downToStop()
 # wait(2000)
-wall.center()
+# wall.center()
+wall.reset_pos()
+
 
 
 # Up/Down
-# wait(1000)
-# wall.upTo(20, wait=False)
+wait(1000)
+wall.upTo(20)
+hub.speaker.beep(500)
+wall.upTo(20)
 # hub.speaker.beep(500)
-# wall.upTo(20)
-# hub.speaker.beep(500)
-# wall.upTo(40)
+wall.upTo(40)
 # hub.speaker.beep(500)
 # wall.upTo(40)
 # wall.upTo(10)
@@ -39,14 +41,13 @@ wall.center()
 # Left/right
 
 
-# wall.right(20)
-# wait(1000)
-# wall.right()
-# wait(2000)
+wall.right(20)
+wait(1000)
+# # wait(2000)
 # wall.left(20)
-# print("1")
+# # print("1")
 
-# wall.leftTo(40)
+wall.leftTo(40)
 # print("2")
 # wait_for_button_pressed()
 

@@ -25,9 +25,9 @@ WAND_HORIZONTAL_HELLIGKEIT_GRENZE_SCHWARZ_ORANGE = 15
 class Wall:
 
     def __init__(self):
-        self.motor_vertical = Motor(Port.D, Direction.COUNTERCLOCKWISE)
+        self.motor_vertical = Motor(Port.D, Direction.CLOCKWISE)
         self.motor_horizontal = Motor(Port.C, Direction.COUNTERCLOCKWISE)
-        self.color_sensor = ColorSensor(Port.E)
+        self.color_sensor = ColorSensor(Port.F)
         self.reset_pos()
 
     def reset_pos(self):

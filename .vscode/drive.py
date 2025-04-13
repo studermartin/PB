@@ -13,13 +13,14 @@ class Drive:
 
         # hub.imu.settings(heading_correction=361) # only available in latest build
 
-        self.left_motor = Motor(Port.B, Direction.COUNTERCLOCKWISE, profile=PROFILE)
-        self.right_motor = Motor(Port.A, Direction.CLOCKWISE, profile=PROFILE)
+        self.left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE, profile=PROFILE)
+        self.right_motor =Motor(Port.B, Direction.CLOCKWISE, profile=PROFILE)
 
         self.drive_base = DriveBase(self.left_motor, self.right_motor, wheel_diameter=56, axle_track=AXLE_TRACK)
 
         self.drive_base.use_gyro(True)
         self.drive_base.settings(turn_rate=50)
+        self.drive_base.settings(straigt_speed=200)
 
 
     def wait_for_ready():
@@ -31,6 +32,9 @@ class Drive:
 
     def turn(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         self.drive_base.turn(angle, then=then, wait=wait)
+
+    def turnToNull(self):
+        self.drive_base.turn(-hub.imu.heading())
 
     def rotate_forward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         '''

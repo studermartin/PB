@@ -3,7 +3,7 @@ from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
 from pybricks import version
-from drive import *
+from hub import hub
 
 print(version)
 
@@ -17,21 +17,22 @@ print(hub.imu.settings())
 print("Ready", hub.imu.ready())
 print()
 
-left_motor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
-right_motor = Motor(Port.A, Direction.CLOCKWISE)
+left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
+right_motor = Motor(Port.B, Direction.CLOCKWISE)
 
 drive_base = DriveBase(left_motor, right_motor, wheel_diameter=56, axle_track=112)
 
 drive_base.use_gyro(True)
 drive_base.settings(turn_rate=50)
 
-wait(2000)
+# wait(2000)
+
 
 # Drive forward by 500mm (half a meter).
 drive_base.straight(500, then=Stop.HOLD, wait=False)
-while not drive_base.stalled():
-    wait(500)
-drive_base.stop()
+# while not drive_base.stalled():
+#     wait(500)
+# drive_base.stop()
 
 hub.speaker.beep(200)
 for i in range(2):
