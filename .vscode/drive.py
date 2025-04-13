@@ -20,7 +20,7 @@ class Drive:
 
         self.drive_base.use_gyro(True)
         self.drive_base.settings(turn_rate=50)
-        self.drive_base.settings(straigt_speed=200)
+        # self.drive_base.settings(straigt_speed=200)
 
 
     def wait_for_ready():
