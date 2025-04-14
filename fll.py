@@ -1,4 +1,3 @@
-from pybricks.hubs import PrimeHub
 from hub import hub
 
 

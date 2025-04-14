@@ -1,8 +1,5 @@
 from pybricks.hubs import PrimeHub
 from pybricks.tools import wait, StopWatch
-from pybricks.parameters import Axis
-from pybricks.pupdevices import Motor
-from pybricks.parameters import Port, Direction, Stop
 
 # Initialize the hub.
 hub = PrimeHub()

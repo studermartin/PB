@@ -1,9 +1,8 @@
 from pybricks.hubs import PrimeHub
-from pybricks.tools import wait, StopWatch
-from pybricks.parameters import Axis, Direction
+from pybricks.tools import wait
+from pybricks.parameters import Direction
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port
-from pybricks.iodevices import PUPDevice
 from uerrno import ENODEV
 
 RUN_TIME=2000
