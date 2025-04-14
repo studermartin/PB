@@ -4,7 +4,7 @@ from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
 
 PROFILE = 7 # https://docs.pybricks.com/en/stable/pupdevices/motor.html
-AXLE_TRACK = 112
+AXLE_TRACK = 120
 
 class Drive:
     def __init__(self):
