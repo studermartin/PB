@@ -1,10 +1,11 @@
+from pybricks import version
 from pybricks.iodevices import PUPDevice
 from pybricks.parameters import Port
 from uerrno import ENODEV
 
 # Source: https://docs.pybricks.com/en/latest/iodevices/pupdevice.html
 
-
+print(version)
 
 # Dictionary of device identifiers along with their name.
 DEVICE_NAMES:dict[int,str] = {

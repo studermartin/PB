@@ -34,10 +34,10 @@ class Wall:
         self.motor_horizontal.reset_angle(0)
 
     def up(self, distance:float, speed: float=VERTICAL_STANDARD_GESCHWINDIGKEIT, wait:bool=True):
-        self.motor_vertical.run_angle(speed, distance/VERTIKAL_WINKEL2STRECKE, wait=wait)
+        return self.motor_vertical.run_angle(speed, distance/VERTIKAL_WINKEL2STRECKE, wait=wait)
 
     def upTo(self,distance:float, speed: float=VERTICAL_STANDARD_GESCHWINDIGKEIT, wait:bool=True):
-        self.motor_vertical.run_target(speed, distance/VERTIKAL_WINKEL2STRECKE, wait=wait)
+        return self.motor_vertical.run_target(speed, distance/VERTIKAL_WINKEL2STRECKE, wait=wait)
 
     def left(self, distance:float=None, speed: float=HORIZONTAL_DEFAULT_SPEED, wait:bool=True):
         if distance is not None:
@@ -46,13 +46,13 @@ class Wall:
             self.motor_horizontal.run(speed)
 
     def leftTo(self, distance:float, speed: float=HORIZONTAL_DEFAULT_SPEED, wait:bool=True):
-        self.motor_horizontal.run_target(speed, distance/HORIZONTAL_WINKEL2STRECKE, wait=wait)
+        return self.motor_horizontal.run_target(speed, distance/HORIZONTAL_WINKEL2STRECKE, wait=wait)
 
     def right(self, distance:float=None, speed: float=HORIZONTAL_DEFAULT_SPEED, wait:bool=True):
         if distance is not None:
-            self.motor_horizontal.run_angle(-speed, distance/HORIZONTAL_WINKEL2STRECKE, wait=wait)
+            return self.motor_horizontal.run_angle(-speed, distance/HORIZONTAL_WINKEL2STRECKE, wait=wait)
         else:
-            self.motor_horizontal.run(-speed)
+            return self.motor_horizontal.run(-speed)
 
     def rightTo(self, distance:float, speed: float=HORIZONTAL_DEFAULT_SPEED, wait:bool=True):
         self.leftTo(-distance, speed=speed, wait=wait)

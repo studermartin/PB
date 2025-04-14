@@ -4,7 +4,7 @@ from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
 
 PROFILE = 7 # https://docs.pybricks.com/en/stable/pupdevices/motor.html
-AXLE_TRACK = 120
+AXLE_TRACK = 140    
 
 class Drive:
     def __init__(self):
@@ -28,7 +28,19 @@ class Drive:
             # wait(200)
 
     def straigt(self, distance:float, then: Stop = Stop.HOLD, wait: bool=True):
-        self.drive_base.straight(distance, then=then, wait=wait)
+        return self.drive_base.straight(distance, then=then, wait=wait)
+
+    def turn_and_drive(self, angle:float, distance: float, then: Stop = Stop.HOLD, wait: bool=True):
+        self.turn(angle)
+        return self.drive(distance, then=then, wait=wait)
+
+    def turn_to_and_drive(self, angle:float, distance: float, then: Stop = Stop.HOLD, wait: bool=True):
+        self.turn_and_drive(angle-self.drive_base.angle(), distance, then=then, wait=wait)
+
+    def straigt_ms(self, time_ms:int, speed:float, then: Stop = Stop.HOLD):
+        self.drive_base.drive(speed, 0)
+        wait(time_ms)
+        self.drive_base.stop()
 
     def turn(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         self.drive_base.turn(angle, then=then, wait=wait)
@@ -40,8 +52,11 @@ class Drive:
         '''
         Drive along the circle to the right.
         '''
-        self.drive_base.curve(AXLE_TRACK/2, angle, then=then, wait=wait)
+        return self.drive_base.curve(AXLE_TRACK/2, angle, then=then, wait=wait)
     
+    def rotate_to_forward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
+        return self.rotate_forward(self, angle-self.drive_base.angle(), then=then, wait=wait)
+
     def rotate_backward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         self.drive_base.curve(-AXLE_TRACK/2, angle, then=then, wait=wait)
 
@@ -50,8 +65,9 @@ class Drive:
             self.turn(angle)
         self.straigt(distance)
 
+
     def stop(self):
-        self.drive_base.stop()
+        return self.drive_base.stop()
 
 drive = Drive()
 
