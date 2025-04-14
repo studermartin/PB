@@ -1,5 +1,7 @@
 from pybricks.tools import wait
+from pybricks.parameters import Stop
 from drive import drive
+from hub import wait_for_button_pressed
 from wall import wall
 
 def run2():
@@ -7,10 +9,10 @@ def run2():
     wall.rightTo(-20)
     wait(100)
     wall.rightTo(7)
-    drive.straight_ms(5, -300)
+    drive.straight_ms(500, -300)
     wait(50)
     wall.upTo(5)
-    drive.turn_to_and_drive(0, 665)
+    drive.turn_to_and_drive(0, 670)
     wall.rightTo(-20, wait=False)
     drive.rotate_forward(-89)
     wall.rightTo(-35)
@@ -42,9 +44,10 @@ def run2():
     drive.turn_to_and_drive(-90, 38)
     
     wall.rightTo(-45)
-    wall.upTo(0)
+    wall.upTo(5)
     wall.rightTo(-10)
-    wall.rightTo(40, wait=False)
+    wall.rightTo(10)
+    wall.rightTo(45, wait=False)
 
     # await gyro_fahren(17, 1050, 88)#
     drive.turn_to_and_drive(-88,170)
@@ -52,7 +55,7 @@ def run2():
     wait(100)
 
     # await fahre_sekunden(0.4, 500)
-    drive.straight_ms(4,500)
+    drive.straight_ms(400,200)
 
     wall.upTo(35)
     wall.rightTo(55)
