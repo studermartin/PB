@@ -17,7 +17,7 @@ HORIZONTAL_WINKEL2STRECKE = 2.0*umath.pi*HORIZONTAL_RADIUS/360    # mm/deg
 HORIZONTAL_GESCHWINDIGKEIT = 1/HORIZONTAL_WINKEL2STRECKE # deg/mm
 HORIZONTAL_DEFAULT_SPEED = 50*HORIZONTAL_GESCHWINDIGKEIT    # deg/mm
 
-WAND_HORIZONTAL_BRIGHTNESS_BOUNDARY_ORANGE_WHITE = 60
+WAND_HORIZONTAL_BRIGHTNESS_BOUNDARY_ORANGE_WHITE = 70
 WAND_HORIZONTAL_HELLIGKEIT_GRENZE_SCHWARZ_ORANGE = 15
 
 class Wall:
@@ -122,7 +122,9 @@ class Wall:
         if initial_color == Color.ORANGE:
             # Auf der orangen Seite liefert die Reflexion bereits eine Reflexionswerte für Weiss, wenn die Hälfte Orange, die andere Hälfte Weiss ist. 
             # Deshalb einfach ein wenig weiterlaufen lassen.
-            wait(0)
+            wait(50)
+        elif initial_color == Color.BLACK:
+            wait(35)
         self.stop()
         beepLow()
         if DEBUG:
