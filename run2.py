@@ -7,7 +7,7 @@ def run2():
     wall.rightTo(-20)
     wait(100)
     wall.rightTo(7)
-    drive.straigt_ms(5, -300)
+    drive.straight_ms(5, -300)
     wait(50)
     wall.upTo(5)
     drive.turn_to_and_drive(0, 665)
@@ -52,7 +52,7 @@ def run2():
     wait(100)
 
     # await fahre_sekunden(0.4, 500)
-    drive.straigt_ms(4,500)
+    drive.straight_ms(4,500)
 
     wall.upTo(35)
     wall.rightTo(55)

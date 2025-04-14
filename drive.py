@@ -37,7 +37,7 @@ class Drive:
     def turn_to_and_drive(self, angle:float, distance: float, then: Stop = Stop.HOLD, wait: bool=True):
         self.turn_and_drive(angle-self.drive_base.angle(), distance, then=then, wait=wait)
 
-    def straigt_ms(self, time_ms:int, speed:float, then: Stop = Stop.HOLD):
+    def straight_ms(self, time_ms:int, speed:float, then: Stop = Stop.HOLD):
         self.drive_base.drive(speed, 0)
         wait(time_ms)
         self.drive_base.stop()
@@ -66,7 +66,7 @@ class Drive:
     def drive(self, distance:float, angle:float=0, then: Stop = Stop.HOLD, wait: bool=True):
         if angle != 0:
             self.turn(angle)
-        self.straigt(distance)
+        self.straight(distance)
 
 
     def stop(self):
