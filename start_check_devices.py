@@ -40,7 +40,8 @@ DEVICE_NAMES:dict[int,str] = {
 
 def find_key(input_dict, value):
     for key, val in input_dict.items():
-        if val == value: return key
+        if val == value: 
+            return key
     return "None"
 
 EXPECTED_DEVICE_CONFIG:dict[int,str]={}

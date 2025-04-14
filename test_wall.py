@@ -1,15 +1,7 @@
-import umath
 from pybricks.tools import wait
-from pybricks.hubs import PrimeHub
-from pybricks.pupdevices import Motor
-from pybricks.parameters import Port, Direction
-from pybricks.robotics import DriveBase
-from pybricks.hubs import PrimeHub
 
-from wall import *
-from hub import *
-
-hub = PrimeHub()
+from wall import wall
+from hub import hub
 
 def print_color():
     while True:

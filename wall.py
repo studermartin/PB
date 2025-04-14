@@ -1,11 +1,9 @@
 import umath
 from pybricks.tools import wait
-from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import Motor, ColorSensor
 from pybricks.parameters import Port, Direction, Color
-from pybricks.robotics import DriveBase
-from pybricks.hubs import PrimeHub
-from fll import *
+
+from fll import beepHigh, beepLow
 
 # Aus dem Winkel in Grad muss die Strecke berechnet werden.
 # Der Radius des Rades ist 7.5 mm.
@@ -42,7 +40,7 @@ class Wall:
         self.motor_vertical.run_target(speed, distance/VERTIKAL_WINKEL2STRECKE, wait=wait)
 
     def left(self, distance:float=None, speed: float=HORIZONTAL_DEFAULT_SPEED, wait:bool=True):
-        if distance != None:
+        if distance is not None:
             self.motor_horizontal.run_angle(speed, distance/HORIZONTAL_WINKEL2STRECKE, wait=wait)
         else:
             self.motor_horizontal.run(speed)
@@ -51,7 +49,7 @@ class Wall:
         self.motor_horizontal.run_target(speed, distance/HORIZONTAL_WINKEL2STRECKE, wait=wait)
 
     def right(self, distance:float=None, speed: float=HORIZONTAL_DEFAULT_SPEED, wait:bool=True):
-        if distance != None:
+        if distance is not None:
             self.motor_horizontal.run_angle(-speed, distance/HORIZONTAL_WINKEL2STRECKE, wait=wait)
         else:
             self.motor_horizontal.run(-speed)
