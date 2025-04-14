@@ -1,10 +1,6 @@
 from pybricks.hubs import PrimeHub
-from pybricks.tools import wait, StopWatch
-from pybricks.parameters import Axis
-from pybricks.pupdevices import Motor
-from pybricks.parameters import Port, Direction, Stop
 from pybricks.pupdevices import ColorSensor
-from pybricks.parameters import Port, Color
+from pybricks.parameters import Port
 from pybricks.tools import wait
 
 # Initialize the hub.
