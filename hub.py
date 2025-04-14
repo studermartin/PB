@@ -1,6 +1,6 @@
 from pybricks.hubs import PrimeHub
 from pybricks.parameters import Axis
-from pybricks.tools import wait, StopWatch
+from pybricks.tools import wait
 
 hub = PrimeHub(top_side=Axis.Z, front_side=Axis.Y)
 
