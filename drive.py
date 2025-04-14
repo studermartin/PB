@@ -1,4 +1,4 @@
-from hub import *
+from hub import hub, wait
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
