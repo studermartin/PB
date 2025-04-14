@@ -19,5 +19,3 @@ wall.leftTo(0, wait=False)
 wait(3000)
 
 print("Move wall while driving.")
-
-

@@ -1,7 +1,6 @@
 from pybricks.tools import wait
 from drive import drive
 from wall import wall
-from hub import wait_for_button_pressed
 
 def run2():
 
