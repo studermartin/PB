@@ -9,9 +9,6 @@ def print_color():
         print(wall.center_color())
         wait(100)
 
-wall.center()
-exit()
-
 # Check direction
 print("Wall goes 20 mm to the right...", None)
 wall.right(20)
