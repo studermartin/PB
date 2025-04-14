@@ -2,13 +2,12 @@ from pybricks.tools import wait
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
-from pybricks.tools import *
 from pybricks import version
-from drive import *
+from drive import drive
 
 
 wait(2000)
-print(-hub.imu.heading())
+# print(-hub.imu.heading())
 drive.turnToNull(0)
 # drive.straigt(750)
 # drive.turn(90)
