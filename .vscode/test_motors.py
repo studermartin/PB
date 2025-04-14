@@ -4,55 +4,43 @@ from pybricks.parameters import Axis, Direction
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port
 from pybricks.iodevices import PUPDevice
+from uerrno import ENODEV
+
+RUN_TIME=2000
+RUN_SPEED = 500
 
 hub = PrimeHub()
 
-MOTOR_PIDS:dict[str,tuple[int,int,int,int]] = { "big":(42484, 21242, 5310, 8, 15),
-             "middle": (15117, 7558, 1889, 8, 15)}
-
-def find_key(input_dict, value):
-    for key, val in input_dict.items():
-        if val == value: return key
-    return "None"
-
-def motor_from_pid(motor: Motor):
-    return find_key(MOTOR_PIDS, motor.control.pid())
-    
-    
-
-def detect(port: Port):
-    motor = Motor(port)
-    print(motor_from_pid(motor))
-    motor.close()
-
-
-def test(port: Port, direction: Direction):
-    motor = Motor(port, direction)
-    motor.run_time(300, 1000)
-    print(motor.control.pid())
-    motor.close()
-
-test(Port.D, Direction.CLOCKWISE) 
-
-
+def run_motor(port: Port, direction: Direction):
+        motor = Motor(port, direction)
+        motor.run_time(RUN_TIME, RUN_SPEED)
+        motor.close()
 
 ports = [ Port.A, Port.B, Port.C, Port.D, Port.E, Port.F]
 print(ports)
 
+print("Run all motors on all ports with for", RUN_TIME, "ms with speed", RUN_SPEED, " in both directions.")
+print("Port.C: Expected")
+print("  CLOCKWISE: wall to the right")
+print("Port.D: Expected")
+print("  CLOCKWISE: wall down")
+print("  COUNTERCLOCKWISE: wall up")
 
 for port in ports:
-    # for direction in [Direction.CLOCKWISE, Direction.COUNTERCLOCKWISE]:
-        print("Port ", port)
-        # try:
-        #     pass
-        # catch():
-        #     pass
-        # test(port, direction)
+    print(port)
+    for direction in [Direction.CLOCKWISE, Direction.COUNTERCLOCKWISE]:
+        try:
+            run_motor(port, direction)
+            print("  ", direction)
+            wait(RUN_TIME)
+        except OSError as ex:
+            if ex.args[0] == ENODEV:
+                # No motor on this port
+                print(port, ": no motor")
+                break
+            else:
+                raise
 
-        # detect(port)
-
-        pupDevice:PUPDevice=PUPDevice(port)
-        print(pupDevice.info())
 
 
 

@@ -11,11 +11,36 @@ from hub import *
 
 hub = PrimeHub()
 
-# wall.downToStop()
-# wait(2000)
-# wall.center()
-wall.reset_pos()
+def print_color():
+    while True:
+        print(wall.center_reflection())
+        print(wall.center_color())
+        wait(100)
 
+wall.center()
+exit()
+
+# Check direction
+print("Wall goes 20 mm to the right...", None)
+wall.right(20)
+print("done.")
+wait(1000)
+
+print("Wall goes 20 mm up...", None)
+wall.up(20)
+print("done.")
+wait(1000)
+
+# check initial position
+print("Wall goes down...", None)
+wall.downToStop()
+print("done.")
+wait(1000)
+print("Wall is centered...", None)
+wall.center()
+print("done.")
+wait(2000)
+wall.reset_pos()
 
 
 # Up/Down
@@ -41,7 +66,7 @@ wall.upTo(40)
 # Left/right
 
 
-wall.right(20)
+
 wait(1000)
 # # wait(2000)
 # wall.left(20)
