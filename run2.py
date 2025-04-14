@@ -7,47 +7,34 @@ def run2():
 
     wall.rightTo(-20)
     wait(100)
-
     wall.rightTo(7)
-    
     drive.straigt_ms(5, -300)
-    
-
     wait(50)
-    wait_for_button_pressed()
-    
-    # await gyro_fahren(66.5, 900, 0)
+    wall.upTo(5)
     drive.turn_to_and_drive(0, 665)
     wall.rightTo(-20, wait=False)
-
-    # await drehe_auf(89, Drehrichtung.GEGENUHRZEIGERSINN, Raeder.RECHTS)
     drive.rotate_forward(-89)
-    
     wall.rightTo(-35)
 
-    # await gyro_fahren(63.5, 1050, 89)
-    drive.turn_to_and_drive(-89, 635)
-
+    # Anglerfisch 
+    drive.turn_to_and_drive(-89, 645)
     wall.rightTo(-20)
 
-    # await gyro_fahren(-4.3, 500, 90)
+    # Bodenprobe aufnehmen
     drive.turn_to_and_drive(-90, -43)
-    
     wall.rightTo(75)
+    drive.turn_to_and_drive(-90, 170)
+    
+    # wait_for_button_pressed()
 
-    # await gyro_fahren(15, 900, 90)
-    drive.turn_to_and_drive(-90,150)
-
+    # Wasserprobe wegschieben 
     wall.rightTo(30)
-    
-    # await gyro_fahren(18, 1050, 90)
-    drive.turn_to_and_drive(-90,180)
-    
+    drive.turn_to_and_drive(-90, 190)####
+
     wall.rightTo(-55, wait=False)
 
-    # await gyro_fahren(10, 500, 90)
-    drive.turn_to_and_drive(-90,100)
-    
+    drive.turn_to_and_drive(-90, 90)
+
     wall.rightTo(-75)
     wall.rightTo(-55, wait=False)
     wall.upTo(30)
@@ -61,7 +48,7 @@ def run2():
     wall.rightTo(40, wait=False)
 
     # await gyro_fahren(17, 1050, 88)#
-    drive.turn_and_drive(-88,170)
+    drive.turn_to_and_drive(-88,170)
     
     wait(100)
 
@@ -73,7 +60,7 @@ def run2():
     wall.upTo(10)
     
     # await gyro_fahren(-20, 1050, 90)
-    drive.turn_and_drive(-90,-200)
+    drive.turn_to_and_drive(-90,-200)
 
     wall.upTo(0, wait=False)
     wall.rightTo(0, wait=False)
@@ -89,7 +76,7 @@ def run2():
     wall.rightTo(0)
 
     # await gyro_fahren(57, 1050, 140)
-    drive.turn_to_and_drive(-140,57)
+    drive.turn_to_and_drive(-140,570)
 
 
 

@@ -20,7 +20,7 @@ class Drive:
 
         self.drive_base.use_gyro(True)
         self.drive_base.settings(turn_rate=50)
-        # self.drive_base.settings(straigt_speed=200)
+        self.drive_base.settings(straight_speed=400)
 
 
     def wait_for_ready():
@@ -55,10 +55,13 @@ class Drive:
         return self.drive_base.curve(AXLE_TRACK/2, angle, then=then, wait=wait)
     
     def rotate_to_forward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
-        return self.rotate_forward(self, angle-self.drive_base.angle(), then=then, wait=wait)
+        return self.rotate_forward(self, angle-self.drive_base.angle(), wait=wait)
 
     def rotate_backward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
-        self.drive_base.curve(-AXLE_TRACK/2, angle, then=then, wait=wait)
+        return self.drive_base.curve(-AXLE_TRACK/2, angle, then=then, wait=wait)
+
+    def rotate_to_backward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
+        return self.rotate_backward(self, angle-self.drive_base.angle(), wait=wait)
 
     def drive(self, distance:float, angle:float=0, then: Stop = Stop.HOLD, wait: bool=True):
         if angle != 0:

@@ -4,7 +4,9 @@ from drive import drive
 
 wait(2000)
 # print(-hub.imu.heading())
-drive.turnToNull(0)
+drive.straight(1)
+drive.rotate_to_forward(0)
+drive.rotate_to_backward(0)
 # drive.straigt(750)
 # drive.turn(90)
 # wait(100)

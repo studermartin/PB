@@ -2,10 +2,12 @@ from pybricks import version
 from pybricks.iodevices import PUPDevice
 from pybricks.parameters import Port
 from uerrno import ENODEV
+from hub import hub
 
 # Source: https://docs.pybricks.com/en/latest/iodevices/pupdevice.html
 
 print(version)
+print(hub.battery.voltage(), "mV")
 
 # Dictionary of device identifiers along with their name.
 DEVICE_NAMES:dict[int,str] = {
