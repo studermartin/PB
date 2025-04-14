@@ -1,5 +1,3 @@
-from pybricks.tools import wait
-from pybricks import version
 from drive import drive
 from hub import wait_for_button_pressed
 
