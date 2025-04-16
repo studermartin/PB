@@ -30,13 +30,13 @@ class Wall:
 
         self.reset_pos()
 
-    def get_left_right_angle_Speed_or_default(self, speed: float):
+    def get_left_right_angle_Speed_or_default(self, speed: float)->float:
         return LEFT_RIGHT_SPEED*(speed if speed is not None else self.left_right_speed_default)
     
-    def get_up_down_angle_speed_or_default(self, speed: float):
+    def get_up_down_angle_speed_or_default(self, speed: float)->float:
         return UP_DOWN_SPEED*(speed if speed is not None else self.up_down_speed_default)
 
-    def reset_pos(self):
+    def reset_pos(self)->None:
         self.motor_vertical.reset_angle(0)
         self.motor_horizontal.reset_angle(0)
 
@@ -79,9 +79,9 @@ class Wall:
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
         if distance is not None:
-            self.motor_horizontal.run_angle(self.get_left_right_angle_Speed_or_default(speed), distance/LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
+            return self.motor_horizontal.run_angle(self.get_left_right_angle_Speed_or_default(speed), distance/LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
         else:
-            self.motor_horizontal.run(self.get_left_right_angle_Speed_or_default(speed))
+            return self.motor_horizontal.run(self.get_left_right_angle_Speed_or_default(speed))
 
     def leftTo(self, offset:float, speed: float=None, wait:bool=True):
         """Move wall left to a given offset.
@@ -100,13 +100,13 @@ class Wall:
             return self.motor_horizontal.run(-self.get_left_right_angle_Speed_or_default(speed))
 
     def rightTo(self, distance:float, speed: float=None, wait:bool=True):
-        self.leftTo(-distance, speed=speed, wait=wait)
+        return self.leftTo(-distance, speed=speed, wait=wait)
 
-    def stop(self):
+    def stop(self)->None:
         self.motor_vertical.stop()
         self.motor_horizontal.stop()
 
-    def downToStop(self, speed:float=None):
+    def downToStop(self, speed:float=None)->None:
         self.motor_vertical.run(-self.get_up_down_angle_speed_or_default(speed))
         
         while not self.motor_vertical.stalled():
@@ -134,7 +134,7 @@ class Wall:
             return "BLACK"
 
 
-    def center(self, speed:float = None):
+    def center(self, speed:float = None)->None:
         beepHigh()
         DEBUG=True
 
