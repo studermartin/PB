@@ -10,15 +10,26 @@ def print_color():
         wait(100)
 
 # Check direction
-print("Wall goes 20 mm to the right...", None)
-wall.right(20)
+print("Wall goes 50 mm to the right...", end="")
+wall.right(50)
 print("done.")
 wait(1000)
 
-print("Wall goes 20 mm up...", None)
-wall.up(20)
+print("Wall goes 50 mm to the left with 100 mm/s...", end="")
+wall.left(50, 100)
 print("done.")
 wait(1000)
+
+print("Wall goes 50 mm up...", end="")
+wall.up(50)
+print("done.")
+wait(1000)
+
+print("Wall goes 50 mm down...", end="")
+wall.down(50, 80)
+print("done.")
+wait(1000)
+
 
 # check initial position
 print("Wall goes down...", None)
