@@ -2,6 +2,12 @@ from pybricks.tools import wait
 from pybricks.tools import multitask, run_task
 from wall import wall
 
+async def do():
+    await multitask(wall.upTo(20), wait(3000))
+
+run_task(do())  
+
+
 
 print("Move wall up/down and right/left at the same time", None)
 wall.downToStop()
