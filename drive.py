@@ -3,8 +3,8 @@ from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
 
-PROFILE = 7 # https://docs.pybricks.com/en/stable/pupdevices/motor.html
-AXLE_TRACK = 140    
+PROFILE = None # values from 5 (smallest values for the motors used) up to at least 100 (https://docs.pybricks.com/en/stable/pupdevices/motor.html)
+AXLE_TRACK = 140 
 
 class Drive:
     def __init__(self):
@@ -22,10 +22,17 @@ class Drive:
         self.drive_base.settings(turn_rate=50)
         self.drive_base.settings(straight_speed=400)
 
-
     def wait_for_ready():
         pass # while not hub.imu.ready():
             # wait(200)
+
+    def angle(self)->float:
+        """Get the angle of the drive base.
+
+        Returns:
+            float: accumulated angle since last reset.
+        """
+        return self.drive_base.angle()
 
     def straight(self, distance:float, then: Stop = Stop.HOLD, wait: bool=True):
         return self.drive_base.straight(distance, then=then, wait=wait)
@@ -35,7 +42,7 @@ class Drive:
         return self.drive(distance, then=then, wait=wait)
 
     def turn_to_and_drive(self, angle:float, distance: float, then: Stop = Stop.HOLD, wait: bool=True):
-        self.turn_and_drive(angle-self.drive_base.angle(), distance, then=then, wait=wait)
+        self.turn_and_drive(angle-self.angle(), distance, then=then, wait=wait)
 
     def straight_ms(self, time_ms:int, speed:float, then: Stop = Stop.HOLD):
         self.drive_base.drive(speed, 0)
@@ -44,6 +51,19 @@ class Drive:
 
     def turn(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         self.drive_base.turn(angle, then=then, wait=wait)
+
+    def turn_to(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
+        """Turn to given angle (clockweise).
+
+        Args:
+            angle (float): _description_
+            then (Stop, optional): _description_. Defaults to Stop.HOLD.
+            wait (bool, optional): _description_. Defaults to True.
+
+        Returns:
+            _type_: _description_
+        """
+        return self.drive_base.turn(angle-self.angle(), then=then, wait=wait)
 
     def turnToNull(self):
         self.drive_base.turn(-hub.imu.heading())
@@ -55,21 +75,27 @@ class Drive:
         return self.drive_base.curve(AXLE_TRACK/2, angle, then=then, wait=wait)
     
     def rotate_to_forward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
-        return self.rotate_forward(angle-self.drive_base.angle(), then=then, wait=wait)
+        return self.rotate_forward(angle-self.angle(), then=then, wait=wait)
 
     def rotate_backward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         return self.drive_base.curve(-AXLE_TRACK/2, angle, then=then, wait=wait)
 
     def rotate_to_backward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
-        return self.rotate_backward(self.drive_base.angle()-angle, then=then, wait=wait)
+        return self.rotate_backward(self.angle()-angle, then=then, wait=wait)
 
     def drive(self, distance:float, angle:float=0, then: Stop = Stop.HOLD, wait: bool=True):
         if angle != 0:
             self.turn(angle)
         self.straight(distance)
 
+    def reset(self):
+        """Reset the angle and distance to 0
+        """
+        return self.drive_base.reset()
 
     def stop(self):
+        """Stop the drive.
+        """
         return self.drive_base.stop()
 
 drive = Drive()
