@@ -96,7 +96,7 @@ for port in ports:
     # Look up the name.
     try:
         print(port, ":", DEVICE_NAMES[id])
-        if id != expected_id:
-            print(" Expected configuration: ", DEVICE_NAMES[expected_id])
+        expected_device = DEVICE_NAMES[expected_id]
+        assert id == expected_id, f"Expected configuration: {expected_device}"
     except KeyError:
         print(port, ":", "Unknown device with ID", id)

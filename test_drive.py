@@ -3,6 +3,17 @@ from drive import drive
 from hub import hub
 from hub import wait_for_button_pressed
 
+def test_turn_to():
+    drive.reset()
+
+    # turn to 45 degree
+    drive.turn_to(45)
+    assert 42<drive.angle()<48
+
+    drive.turn_to(0)
+    assert -2<drive.angle()<2
+
+
 def test_reset():
     drive.reset()
     
@@ -24,9 +35,10 @@ def test_reset():
     drive.turn_to(45)
     assert 42<drive.angle()<48, "Should not move because the last turn_to already set to 45 degree."
 
+test_turn_to()
 test_reset()
    
-
+exit()
 
 drive.straigt(700)
 
