@@ -50,18 +50,22 @@ class Drive:
         self.drive_base.stop()
 
     def turn(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
-        self.drive_base.turn(angle, then=then, wait=wait)
+        """Turns in place by the given angle (clockwise) and stops
+
+        Args:
+            angle (float): Angle of the turn (positive values clockwise)
+            then (Stop, optional): What to do after coming to a standstill. Defaults to Stop.HOLD.
+            wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
+        """
+        return self.drive_base.turn(angle, then=then, wait=wait)
 
     def turn_to(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         """Turn to given angle (clockweise).
 
         Args:
             angle (float): _description_
-            then (Stop, optional): _description_. Defaults to Stop.HOLD.
-            wait (bool, optional): _description_. Defaults to True.
-
-        Returns:
-            _type_: _description_
+            then (Stop, optional): What to do after coming to a standstill. Defaults to Stop.HOLD.
+            wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
         return self.drive_base.turn(angle-self.angle(), then=then, wait=wait)
 
