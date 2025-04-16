@@ -7,7 +7,9 @@ from hub import hub
 # Source: https://docs.pybricks.com/en/latest/iodevices/pupdevice.html
 
 print(version)
+print(hub.system.info())
 print(hub.battery.voltage(), "mV")
+assert hub.battery.voltage()>8000,  "Battery voltage below 8000."
 
 # Dictionary of device identifiers along with their name.
 DEVICE_NAMES:dict[int,str] = {
