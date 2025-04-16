@@ -42,7 +42,7 @@ class Drive:
         return self.drive(distance, then=then, wait=wait)
 
     def turn_to_and_drive(self, angle:float, distance: float, then: Stop = Stop.HOLD, wait: bool=True):
-        self.turn_and_drive(angle-self.angle(), distance, then=then, wait=wait)
+        return self.turn_and_drive(angle-self.angle(), distance, then=then, wait=wait)
 
     def straight_ms(self, time_ms:int, speed:float, then: Stop = Stop.HOLD):
         self.drive_base.drive(speed, 0)
@@ -70,7 +70,7 @@ class Drive:
         return self.drive_base.turn(angle-self.angle(), then=then, wait=wait)
 
     def turnToNull(self):
-        self.drive_base.turn(-hub.imu.heading())
+        return self.drive_base.turn(-hub.imu.heading())
 
     def rotate_forward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         '''
@@ -90,7 +90,7 @@ class Drive:
     def drive(self, distance:float, angle:float=0, then: Stop = Stop.HOLD, wait: bool=True):
         if angle != 0:
             self.turn(angle)
-        self.straight(distance)
+        return self.straight(distance)
 
     def reset(self):
         """Reset the angle and distance to 0
