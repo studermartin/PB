@@ -1,5 +1,4 @@
-
-
+from umath import sqrt
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
@@ -25,11 +24,18 @@ class Drive:
         self.drive_base.settings(turn_rate=50)
         self.drive_base.settings(straight_speed=400)
 
+    def get_straight_speed(self)->float:
+        return self.drive_base.settings()[0]
+    
+    def set_straight_speed(self, speed:float)->None:
+        self.drive_base.settings(straight_speed=speed)
+
     # Source: https://fll-pigeons.github.io/gamechangers/gyro_pid.html
-    def drive_to_pid_d(self, angle:float=0.0):
+    # The PID program using DriveBase.
+    def drive_to(self, distance:float, target_angle:float=0.0, straight_speed:float=None):
         dT = 5  # time per loop in milliseconds        
-        Td = 1000 # target distance
-        Ts = 50 # target speed of robot in mm/s
+        Td = distance # target distance
+        Ts = straight_speed if straight_speed is not None else self.get_straight_speed() # target speed of robot in mm/s
         Kp = 5 #  3 # the Constant 'K' for the 'p' proportional controller
 
         integral = 0 # initialize
@@ -40,7 +46,7 @@ class Drive:
         Kd = 37.5 # 3 #  the Constant 'K' for the 'd' derivative term
 
         while (self.drive_base.distance() < Td):
-            error = self.drive_base.angle()-angle # proportional 
+            error = self.drive_base.angle()-target_angle # proportional 
             if (error == 0):
                 integral = 0
             else:
@@ -49,11 +55,15 @@ class Drive:
             
             correction = (Kp*(error) + Ki*(integral) + Kd*derivative) * -1
             
-            self.drive_base.drive(Ts, correction)
+            # Deceleration
+            s=(Td-self.drive_base.distance())
+            v=sqrt(2*s*750)
+
+            self.drive_base.drive(min(Ts,v), correction)
 
             lastError = error  
             
-            print("error " + str(error) + "; integral " + str(integral) + "; correction " + str(correction)  )    
+            print("distance: " + str(self.drive_base.distance()) + "; error " + str(error) + "; integral " + str(integral) + "; correction " + str(correction)  )    
             wait(dT)
             
         self.drive_base.stop()

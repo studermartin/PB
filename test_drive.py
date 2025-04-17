@@ -37,17 +37,19 @@ def test_reset():
 
 def test_drive():
     drive.reset()
-    # drive.drive_to_p_p()
-    # drive.drive_to_p_d()
-    # drive.drive_to_pi_d()
-    # drive.drive_to_pid_d(3)
+    drive.drive_to(200, 0, 200)
+    wait(500)
+    print("Distance: ", drive.drive_base.distance())
     # drive.measure_dT()
-    drive.calculate_measures()
-
+    # drive.calculate_measures()
 
 test_drive()
-# sys.exit()
+
 quit()
+
+
+# sys.exit()
+
 
 test_turn_to()
 test_reset()
