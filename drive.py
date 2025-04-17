@@ -22,6 +22,106 @@ class Drive:
         self.drive_base.settings(turn_rate=50)
         self.drive_base.settings(straight_speed=400)
 
+    # Source: https://fll-pigeons.github.io/gamechangers/gyro_pid.html
+    def drive_to_p_p(self):
+        Td = 100 # target distance
+        Tp = 20 # Target power - percentage of max power of motor (power is also known as 'duty cycle' ) 
+
+        Kp = 3 #  the Constant 'K' for the 'p' proportional controller
+
+        integral = 0 # initialize
+        Ki = 0.025 #  the Constant 'K' for the 'i' integral term
+
+        while (self.drive_base.distance() < Td):
+            error = self.drive_base.angle() # proportional
+            if (error == 0): # prevent the integral term from 'overshooting'
+                integral = 0
+            else:
+                integral = integral + error 
+                
+            correction = (Kp*(error) + Ki*(integral)) * -1       
+
+            power_left = Tp + correction
+            power_right = Tp - correction   
+
+            self.left_motor.dc(power_left) 
+            self.right_motor.dc(power_right) 
+
+            print("error " + str(error) + "; correction " + str(correction)  + "; integral " + str(integral)+ "; power_left " + str(power_left) + "; power_right " + str(power_right))   
+            wait(10)
+        
+        self.stop()
+
+    def drive_to_p_d(self):
+        Td = 300 # target distance
+        Ts = 100 # target speed of robot in mm/s
+
+        Kp = 5 #  the Constant 'K' for the 'p' proportional controller
+
+        while (self.drive_base.distance() < Td):
+            error = self.drive_base.angle() # proportional
+            
+            correction = Kp * error * -1 
+            
+            self.drive_base.drive(Ts, correction)
+
+            print("error " + str(error) + "; correction " + str(correction))   
+            wait(10)
+            
+        self.drive_base.stop()
+
+    def drive_to_pi_d(self):
+        Td = 300 # target distance
+        Ts = 100 # target speed of robot in mm/s
+        Kp = 3 #  the Constant 'K' for the 'p' proportional controller
+
+        integral = 0 # initialize
+        Ki = 0.025 #  the Constant 'K' for the 'i' integral term
+
+        while (self.drive_base.distance() < Td):
+            error = self.drive_base.angle() # proportional
+            if (error == 0): # prevent the integral term from 'overshooting'
+                integral = 0
+            else:
+                integral = integral + error 
+                
+            correction = (Kp*(error) + Ki*(integral)) * -1
+            
+            self.drive_base.drive(Ts, correction)
+
+            print("error " + str(error) + "; integral " + str(integral) + "; correction " + str(correction)  )    
+        self.drive_base.stop()
+
+    def drive_to_pid_d(self, angle:float=0.0):
+        Td = 300 # target distance
+        Ts = 100 # target speed of robot in mm/s
+        Kp = 3 #  the Constant 'K' for the 'p' proportional controller
+
+        integral = 0 # initialize
+        Ki = 0.025 #  the Constant 'K' for the 'i' integral term
+
+        derivative = 0 # initialize
+        lastError = 0 # initialize
+        Kd = 3 #  the Constant 'K' for the 'd' derivative term
+
+        while (self.drive_base.distance() < Td):
+            error = self.drive_base.angle()-angle # proportional 
+            if (error == 0):
+                integral = 0
+            else:
+                integral = integral + error    
+            derivative = error - lastError  
+            
+            correction = (Kp*(error) + Ki*(integral) + Kd*derivative) * -1
+            
+            self.drive_base.drive(Ts, correction)
+
+            lastError = error  
+            
+            print("error " + str(error) + "; integral " + str(integral) + "; correction " + str(correction)  )    
+            
+        self.drive_base.stop()
+
     def wait_for_ready():
         pass # while not hub.imu.ready():
             # wait(200)

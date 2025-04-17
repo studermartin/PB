@@ -35,10 +35,22 @@ def test_reset():
     drive.turn_to(45)
     assert 42<drive.angle()<48, "Should not move because the last turn_to already set to 45 degree."
 
+def test_drive():
+    drive.reset()
+    # drive.drive_to_p_p()
+    # drive.drive_to_p_d()
+    # drive.drive_to_pi_d()
+    drive.drive_to_pid_d()
+
+
+test_drive()
+# sys.exit()
+quit()
+
 test_turn_to()
 test_reset()
    
-exit()
+
 
 drive.straigt(700)
 
