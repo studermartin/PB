@@ -40,7 +40,8 @@ def test_drive():
     # drive.drive_to_p_p()
     # drive.drive_to_p_d()
     # drive.drive_to_pi_d()
-    drive.drive_to_pid_d()
+    drive.drive_to_pid_d(3)
+    # drive.measure_dT()
 
 
 test_drive()

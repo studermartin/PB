@@ -1,7 +1,10 @@
-from hub import hub, wait
+
+
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
+from pybricks.tools import StopWatch
+from hub import hub, wait
 
 PROFILE = None # values from 5 (smallest values for the motors used) up to at least 100 (https://docs.pybricks.com/en/stable/pupdevices/motor.html)
 AXLE_TRACK = 140 
@@ -93,16 +96,17 @@ class Drive:
         self.drive_base.stop()
 
     def drive_to_pid_d(self, angle:float=0.0):
-        Td = 300 # target distance
-        Ts = 100 # target speed of robot in mm/s
-        Kp = 3 #  the Constant 'K' for the 'p' proportional controller
+        dT = 5  # time per loop in milliseconds        
+        Td = 1000 # target distance
+        Ts = 50 # target speed of robot in mm/s
+        Kp = 5 #  3 # the Constant 'K' for the 'p' proportional controller
 
         integral = 0 # initialize
-        Ki = 0.025 #  the Constant 'K' for the 'i' integral term
+        Ki = 0.06 # 0.025 #  the Constant 'K' for the 'i' integral term
 
         derivative = 0 # initialize
         lastError = 0 # initialize
-        Kd = 3 #  the Constant 'K' for the 'd' derivative term
+        Kd = 37.5 # 3 #  the Constant 'K' for the 'd' derivative term
 
         while (self.drive_base.distance() < Td):
             error = self.drive_base.angle()-angle # proportional 
@@ -119,8 +123,49 @@ class Drive:
             lastError = error  
             
             print("error " + str(error) + "; integral " + str(integral) + "; correction " + str(correction)  )    
+            wait(dT)
             
         self.drive_base.stop()
+
+    def measure_dT(self)->None:
+        watch = StopWatch()
+        print("Loop start")
+
+        Ts = 150 # target speed of robot in mm/s
+
+        Kp = 3 #  the Constant 'K' for the 'p' proportional controller
+
+        integral = 0 # initialize
+        Ki = 0.025 #  the Constant 'K' for the 'i' integral term
+
+        derivative = 0 # initialize
+        lastError = 0 # initialize
+        Kd = 3 #  the Constant 'K' for the 'd' derivative term
+
+        count = 0
+        for count in range(500):    
+            wait(5)
+            error = self.drive_base.angle() # proportional 
+            if (error == 0): # prevent the integral term from 'overshooting'
+                integral = 0
+            else:
+                integral = integral + error    
+            derivative = error - lastError  
+            
+            correction = (Kp*(error) + Ki*(integral) + + Kd*derivative) * -1
+            
+            self.drive_base.drive(Ts, correction)
+
+            lastError = error  
+            
+            count = count + 1
+
+        self.drive_base.stop()
+
+        time = watch.time()
+        print("Loop time [s]: " + str(time/1000.0))
+        print("Loop iterations: " + str(count))
+        print("time per loop (dT): " + str(time/1000.0 / count))
 
     def wait_for_ready():
         pass # while not hub.imu.ready():
