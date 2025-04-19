@@ -20,7 +20,7 @@ class Drive:
         self.drive_base = DriveBase(self.left_motor, self.right_motor, wheel_diameter=56, axle_track=AXLE_TRACK)
 
         self.drive_base.use_gyro(True)
-        self.drive_base.settings(turn_rate=50)
+        self.drive_base.settings(turn_rate=40)
         self.drive_base.settings(straight_speed=400)
 
     def get_straight_speed(self)->float:
@@ -109,7 +109,7 @@ class Drive:
 
             delta_from_start = self.drive_base.distance()-start_distance
             delta_distance = fabs(target_distance)-fabs(delta_from_start)
-            print("Target distance: ", target_distance, "; Start distance: ", start_distance, "; Delta distance from start: ", delta_from_start, "; Delta distance to target", delta_distance)
+            # print("Target distance: ", target_distance, "; Start distance: ", start_distance, "; Delta distance from start: ", delta_from_start, "; Delta distance to target", delta_distance)
 
         # to implement the "then"
         self.drive_base.straight(0,then)         
