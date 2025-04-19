@@ -7,14 +7,11 @@ from hub import wait_for_button_pressed
 
 drive.turn_to(90)
 drive.turn_to(0)
-drive.drive_to(600,0,straight_speed=300)
-drive.drive_to(-600,0,straight_speed=300)
+drive.drive_to(600,3,straight_speed=300)
+drive.drive_to(-600,3,straight_speed=300)
 
 
-exit()
-
-
-
+"""
 # wait(2000)
 print(-hub.imu.heading())
 # drive.straight(100)
@@ -77,3 +74,4 @@ drive.stop()
 
 wait(10000)
 
+"""
