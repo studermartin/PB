@@ -4,10 +4,14 @@ from drive import drive
 from hub import hub
 from hub import wait_for_button_pressed
 
-quit()
+
+drive.turn_to(90)
+drive.turn_to(0)
+drive.drive_to(600,0,straight_speed=300)
+drive.drive_to(-600,0,straight_speed=300)
 
 
-drive.straigt(700)
+exit()
 
 
 

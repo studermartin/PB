@@ -5,7 +5,7 @@ from pybricks.robotics import DriveBase
 from hub import hub, wait
 
 PROFILE = None # values from 5 (smallest values for the motors used) up to at least 100 (https://docs.pybricks.com/en/stable/pupdevices/motor.html)
-AXLE_TRACK = 140 
+AXLE_TRACK = 140
 
 class Drive:
     def __init__(self):
