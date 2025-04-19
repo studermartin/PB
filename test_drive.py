@@ -139,11 +139,13 @@ def calculate_measures()->None:
     print("inputs: Kc=" + str(Kc) + "; dT=" + str(dT) + "; Pc=" + str(Pc))
     print("recommended PID parms: Kp=" + str(Kp) + "; Ki=" + str(Ki) + "; Kd=" + str(Kd))
 
-
-# test_drive()
-measure_dT()
+print(drive.__straight_deceleration())
 
 quit()
+
+test_drive()
+
+
 
 
 # sys.exit()

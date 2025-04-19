@@ -2,7 +2,6 @@ from umath import sqrt
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
-from pybricks.tools import StopWatch
 from hub import hub, wait
 
 PROFILE = None # values from 5 (smallest values for the motors used) up to at least 100 (https://docs.pybricks.com/en/stable/pupdevices/motor.html)
@@ -25,27 +24,58 @@ class Drive:
         self.drive_base.settings(straight_speed=400)
 
     def get_straight_speed(self)->float:
+        """Get straight speed
+
+        Returns:
+            float: straight speed in mm/s
+        """
         return self.drive_base.settings()[0]
     
     def set_straight_speed(self, speed:float)->None:
+        """Set straight speed
+
+        Args:
+            speed (float): Straight speed in mm/s
+        """
         self.drive_base.settings(straight_speed=speed)
 
-    # Source: https://fll-pigeons.github.io/gamechangers/gyro_pid.html
-    # The PID program using DriveBase.
-    def drive_to(self, distance:float, target_angle:float=0.0, straight_speed:float=None):
-        dT = 5  # time per loop in milliseconds        
-        Td = distance # target distance
-        Ts = straight_speed if straight_speed is not None else self.get_straight_speed() # target speed of robot in mm/s
-        Kp = 5 #  3 # the Constant 'K' for the 'p' proportional controller
+    def get_straight_deceleration(self)->float:
+        """Get straight deceleration
+
+        Returns:
+            float: straight deceleration in mm/s^2
+        """
+        # https://docs.pybricks.com/en/stable/robotics.html#
+        deceleration = drive.drive_base.settings()[1]
+        if isinstance(deceleration, tuple):
+            deceleration = deceleration[1]
+        return deceleration
+
+    # Source for the PID controller: https://fll-pigeons.github.io/gamechangers/gyro_pid.html (PID program using DriveBase)
+    # Added deceleration.
+    def drive_to(self, distance:float, target_angle:float=0.0, straight_speed:float=None, then: Stop = Stop.HOLD):
+        """Drive distance to given target angle. 
+        The target angle should not deviate to much from the current angle. If so consider a turn first. 
+
+        Args:
+            distance (float): Distance in mm
+            target_angle (float, optional): Target angle. Defaults to 0.0.
+            straight_speed (float, optional): Straight speed. Defaults to default straight speed.
+            then (Stop, optional): What to do after coming to a standstill. Defaults to Stop.HOLD.
+        """
+        loop_time = 5  # time per loop in milliseconds        
+        target_distance = distance # target distance
+        target_speed = straight_speed if straight_speed is not None else self.get_straight_speed() # target speed of robot in mm/s
+        k_p = 5 #  3 # the Constant 'K' for the 'p' proportional controller
 
         integral = 0 # initialize
-        Ki = 0.06 # 0.025 #  the Constant 'K' for the 'i' integral term
+        k_i = 0.06 # 0.025 #  the Constant 'K' for the 'i' integral term
 
         derivative = 0 # initialize
         lastError = 0 # initialize
-        Kd = 37.5 # 3 #  the Constant 'K' for the 'd' derivative term
+        k_d = 37.5 # 3 #  the Constant 'K' for the 'd' derivative term
 
-        while (self.drive_base.distance() < Td):
+        while (self.drive_base.distance() < target_distance):
             error = self.drive_base.angle()-target_angle # proportional 
             if (error == 0):
                 integral = 0
@@ -53,20 +83,26 @@ class Drive:
                 integral = integral + error    
             derivative = error - lastError  
             
-            correction = (Kp*(error) + Ki*(integral) + Kd*derivative) * -1
+            correction = (k_p*(error) + k_i*(integral) + k_d*derivative) * -1
             
-            # Deceleration
-            s=(Td-self.drive_base.distance())
-            v=sqrt(2*s*750)
+            # linear deceleration to target distance
+            # Usual equations for accelerated/decelerated movement 
+            #   v = a*t
+            #   s = 1/2*a*t^2
+            # lead to
+            #   v = sqrt(2*s*a)
+            delta_distance=target_distance-self.drive_base.distance()
+            deceleration_speed=sqrt(2*delta_distance*self.get_straight_deceleration())
 
-            self.drive_base.drive(min(Ts,v), correction)
+            self.drive_base.drive(min(target_speed,deceleration_speed), correction)
 
             lastError = error  
             
-            print("distance: " + str(self.drive_base.distance()) + "; error " + str(error) + "; integral " + str(integral) + "; correction " + str(correction)  )    
-            wait(dT)
-            
-        self.drive_base.stop()
+            # print("distance: " + str(self.drive_base.distance()) + "; error " + str(error) + "; integral " + str(integral) + "; correction " + str(correction)  )    
+            wait(loop_time)
+
+        # to implement the "then"
+        self.drive_base.straight(0,then)         
 
     def wait_for_ready():
         pass # while not hub.imu.ready():
