@@ -1,4 +1,4 @@
-from umath import sqrt
+from umath import sqrt, fabs, copysign
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
@@ -54,11 +54,11 @@ class Drive:
     # Source for the PID controller: https://fll-pigeons.github.io/gamechangers/gyro_pid.html (PID program using DriveBase)
     # Added deceleration.
     def drive_to(self, distance:float, target_angle:float=0.0, straight_speed:float=None, then: Stop = Stop.HOLD):
-        """Drive distance to given target angle. 
+        """Drive distance forward/backward to given target angle.
         The target angle should not deviate to much from the current angle. If so consider a turn first. 
 
         Args:
-            distance (float): Distance in mm
+            distance (float): Distance in mm. Positive values to drive foward, negative value to drive backward.
             target_angle (float, optional): Target angle. Defaults to 0.0.
             straight_speed (float, optional): Straight speed. Defaults to default straight speed.
             then (Stop, optional): What to do after coming to a standstill. Defaults to Stop.HOLD.
@@ -75,7 +75,11 @@ class Drive:
         lastError = 0 # initialize
         k_d = 37.5 # 3 #  the Constant 'K' for the 'd' derivative term
 
-        while (self.drive_base.distance() < target_distance):
+        start_distance = self.drive_base.distance()
+        delta_from_start = self.drive_base.distance()-start_distance    # if the robot drives backward, self.drive_base.distance() yields negative values
+        delta_distance = fabs(target_distance)-fabs(delta_from_start)
+
+        while (delta_distance>0):
             error = self.drive_base.angle()-target_angle # proportional 
             if (error == 0):
                 integral = 0
@@ -91,15 +95,21 @@ class Drive:
             #   s = 1/2*a*t^2
             # lead to
             #   v = sqrt(2*s*a)
-            delta_distance=target_distance-self.drive_base.distance()
+            
             deceleration_speed=sqrt(2*delta_distance*self.get_straight_deceleration())
+            speed = min(target_speed,deceleration_speed)
+            speed = copysign(speed,distance)
 
-            self.drive_base.drive(min(target_speed,deceleration_speed), correction)
+            self.drive_base.drive(speed, correction)
 
             lastError = error  
             
             # print("distance: " + str(self.drive_base.distance()) + "; error " + str(error) + "; integral " + str(integral) + "; correction " + str(correction)  )    
             wait(loop_time)
+
+            delta_from_start = self.drive_base.distance()-start_distance
+            delta_distance = fabs(target_distance)-fabs(delta_from_start)
+            print("Target distance: ", target_distance, "; Start distance: ", start_distance, "; Delta distance from start: ", delta_from_start, "; Delta distance to target", delta_distance)
 
         # to implement the "then"
         self.drive_base.straight(0,then)         

@@ -38,11 +38,13 @@ def test_reset():
 
 def test_drive():
     drive.reset()
-    drive.drive_to(200, 0, 200)
+    drive.drive_to(2500, 0, 200)
     wait(500)
     print("Distance: ", drive.drive_base.distance())
     # drive.measure_dT()
     # drive.calculate_measures()
+
+    # drive.drive_to(-2500, 0, 200)
 
 
 # Source: https://fll-pigeons.github.io/gamechangers/gyro_pid.html
@@ -139,11 +141,11 @@ def calculate_measures()->None:
     print("inputs: Kc=" + str(Kc) + "; dT=" + str(dT) + "; Pc=" + str(Pc))
     print("recommended PID parms: Kp=" + str(Kp) + "; Ki=" + str(Ki) + "; Kd=" + str(Kd))
 
-print(drive.__straight_deceleration())
-
+# print(drive.__straight_deceleration())
+test_drive()
 quit()
 
-test_drive()
+
 
 
 
