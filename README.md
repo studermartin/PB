@@ -13,6 +13,7 @@
 
 # Default Translating of Driving Speeds
 | Lego | PyBricks | Comments |
+| ------- | ------- | -------- |
 | 1050 | 400 | Max. speed |
 | 1000 | 380 |  |
 | 900 | 350 | |
