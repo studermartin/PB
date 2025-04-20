@@ -10,3 +10,17 @@
 | Drive | await gyro_fahren(-20, 1050, 90) | drive.drive_to(-90,-200) | Change distance from cm to mm ; angle * -1 |
 |  | await fahre_sekunden(0.4, 500) | drive.straigt_ms(4,500) | Change distance from cm to mm |
 | Turn | await drehe_auf(140, Drehrichtung.GEGENUHRZEIGERSINN, Raeder.LINKS) | drive.rotate_to_backward(-140) | angle * -1 |
+
+# Default Translating of Driving Speeds
+| Lego | PyBricks | Comments |
+| 1050 | 400 | Max. speed |
+| 1000 | 380 |  |
+| 900 | 350 | |
+| 800 | 300 |  |
+| 700 | 260 |  |
+| 600 | 230 |  |
+| 500 | 190 |  |
+| 400 | 160 |  |
+| 300 | 110 |  |
+| 200 | 75 |  |
+| 100 | 40 |  |
