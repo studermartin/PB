@@ -4,8 +4,8 @@ from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
 from hub import hub, wait
 
-PROFILE = None # values from 5 (smallest values for the motors used) up to at least 100 (https://docs.pybricks.com/en/stable/pupdevices/motor.html)
-AXLE_TRACK = 140
+_PROFILE = None # values from 5 (smallest values for the motors used) up to at least 100 (https://docs.pybricks.com/en/stable/pupdevices/motor.html)
+_AXLE_TRACK = 140
 
 class Drive:
     def __init__(self):
@@ -14,10 +14,10 @@ class Drive:
 
         # hub.imu.settings(heading_correction=361) # only available in latest build
 
-        self.left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE, profile=PROFILE)
-        self.right_motor =Motor(Port.B, Direction.CLOCKWISE, profile=PROFILE)
+        self.left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE, profile=_PROFILE)
+        self.right_motor =Motor(Port.B, Direction.CLOCKWISE, profile=_PROFILE)
 
-        self.drive_base = DriveBase(self.left_motor, self.right_motor, wheel_diameter=56, axle_track=AXLE_TRACK)
+        self.drive_base = DriveBase(self.left_motor, self.right_motor, wheel_diameter=56, axle_track=_AXLE_TRACK)
 
         self.drive_base.use_gyro(True)
         self.drive_base.settings(turn_rate=40)
@@ -168,13 +168,13 @@ class Drive:
         '''
         Drive along the circle to the right.
         '''
-        return self.drive_base.curve(AXLE_TRACK/2, angle, then=then, wait=wait)
+        return self.drive_base.curve(_AXLE_TRACK/2, angle, then=then, wait=wait)
     
     def rotate_to_forward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         return self.rotate_forward(angle-self.angle(), then=then, wait=wait)
 
     def rotate_backward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
-        return self.drive_base.curve(-AXLE_TRACK/2, angle, then=then, wait=wait)
+        return self.drive_base.curve(-_AXLE_TRACK/2, angle, then=then, wait=wait)
 
     def rotate_to_backward(self, angle:float, then: Stop = Stop.HOLD, wait: bool=True):
         return self.rotate_backward(self.angle()-angle, then=then, wait=wait)

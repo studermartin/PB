@@ -7,16 +7,16 @@ from fll import beepHigh, beepLow
 
 # Aus dem Winkel in Grad muss die Strecke berechnet werden.
 # Der Radius des Rades ist 7.5 mm.
-UP_DOWN_RADIUS = 7.95
-UP_DOWN_ANGLE2DISTANCE = 2.0*umath.pi*UP_DOWN_RADIUS/360    # mm/deg 
-UP_DOWN_SPEED = 1 / UP_DOWN_ANGLE2DISTANCE # deg/mm
+_UP_DOWN_RADIUS = 7.95
+_UP_DOWN_ANGLE2DISTANCE = 2.0*umath.pi*_UP_DOWN_RADIUS/360    # mm/deg 
+_UP_DOWN_SPEED = 1 / _UP_DOWN_ANGLE2DISTANCE # deg/mm
 
-LEFT_RIGHT_RADIUS:float = 10.0
-LEFT_RIGHT_ANGLE2DISTANCE = 2.0*umath.pi*LEFT_RIGHT_RADIUS/360    # mm/deg 
-LEFT_RIGHT_SPEED = 1/LEFT_RIGHT_ANGLE2DISTANCE # deg/mm
+_LEFT_RIGHT_RADIUS:float = 10.0
+_LEFT_RIGHT_ANGLE2DISTANCE = 2.0*umath.pi*_LEFT_RIGHT_RADIUS/360    # mm/deg 
+_LEFT_RIGHT_SPEED = 1/_LEFT_RIGHT_ANGLE2DISTANCE # deg/mm
 
-WAND_HORIZONTAL_BRIGHTNESS_BOUNDARY_ORANGE_WHITE = 70
-WAND_HORIZONTAL_BRIGHTNESS_BOUNDARY_BLACK_ORANGE = 15
+_WALL_HORIZONTAL_BRIGHTNESS_BOUNDARY_ORANGE_WHITE = 70
+_WALL_HORIZONTAL_BRIGHTNESS_BOUNDARY_BLACK_ORANGE = 15
 
 class Wall:
 
@@ -31,10 +31,10 @@ class Wall:
         self.reset_pos()
 
     def get_left_right_angle_Speed_or_default(self, speed: float)->float:
-        return LEFT_RIGHT_SPEED*(speed if speed is not None else self.left_right_speed_default)
+        return _LEFT_RIGHT_SPEED*(speed if speed is not None else self.left_right_speed_default)
     
     def get_up_down_angle_speed_or_default(self, speed: float)->float:
-        return UP_DOWN_SPEED*(speed if speed is not None else self.up_down_speed_default)
+        return _UP_DOWN_SPEED*(speed if speed is not None else self.up_down_speed_default)
 
     def reset_pos(self)->None:
         self.motor_vertical.reset_angle(0)
@@ -48,7 +48,7 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to default speed.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_vertical.run_angle(self.get_up_down_angle_speed_or_default(speed), distance/UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        return self.motor_vertical.run_angle(self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
 
     def upTo(self, offset:float, speed: float=None, wait:bool=True):
         """Move wall up to a given offset.
@@ -58,7 +58,7 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to None.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_vertical.run_target(self.get_up_down_angle_speed_or_default(speed), offset/UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        return self.motor_vertical.run_target(self.get_up_down_angle_speed_or_default(speed), offset/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
 
     def down(self, distance: float, speed:float=None, wait:bool=True):
         """Move wall down a given distance.
@@ -68,7 +68,7 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to None.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_vertical.run_angle(-self.get_up_down_angle_speed_or_default(speed), distance/UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        return self.motor_vertical.run_angle(-self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
 
     def left(self, distance:float=None, speed: float=None, wait:bool=True):
         """Move wall a given distance to the left.
@@ -79,7 +79,7 @@ class Wall:
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
         if distance is not None:
-            return self.motor_horizontal.run_angle(self.get_left_right_angle_Speed_or_default(speed), distance/LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
+            return self.motor_horizontal.run_angle(self.get_left_right_angle_Speed_or_default(speed), distance/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
         else:
             return self.motor_horizontal.run(self.get_left_right_angle_Speed_or_default(speed))
 
@@ -91,11 +91,11 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to None.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_horizontal.run_target(self.get_left_right_angle_Speed_or_default(speed), offset/LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
+        return self.motor_horizontal.run_target(self.get_left_right_angle_Speed_or_default(speed), offset/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
 
     def right(self, distance:float=None, speed: float=None, wait:bool=True):
         if distance is not None:
-            return self.motor_horizontal.run_angle(-self.get_left_right_angle_Speed_or_default(speed), distance/LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
+            return self.motor_horizontal.run_angle(-self.get_left_right_angle_Speed_or_default(speed), distance/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
         else:
             return self.motor_horizontal.run(-self.get_left_right_angle_Speed_or_default(speed))
 
@@ -118,9 +118,9 @@ class Wall:
 
     def center_color(self):
         reflection = self.center_reflection()
-        if reflection>WAND_HORIZONTAL_BRIGHTNESS_BOUNDARY_ORANGE_WHITE:
+        if reflection>_WALL_HORIZONTAL_BRIGHTNESS_BOUNDARY_ORANGE_WHITE:
             return Color.WHITE
-        elif reflection>WAND_HORIZONTAL_BRIGHTNESS_BOUNDARY_BLACK_ORANGE:
+        elif reflection>_WALL_HORIZONTAL_BRIGHTNESS_BOUNDARY_BLACK_ORANGE:
             return Color.ORANGE
         else:
             return Color.BLACK
@@ -174,6 +174,5 @@ class Wall:
         beepLow()
         if DEBUG:
             print("Ende: wand_horizontal_ausrichten_neu")
-
 
 wall = Wall()

@@ -1,3 +1,4 @@
+from micropython import mem_info
 from pybricks import version
 from pybricks.iodevices import PUPDevice
 from pybricks.parameters import Port
@@ -10,6 +11,9 @@ print(version)
 print(hub.system.info())
 print(hub.battery.voltage(), "mV")
 assert hub.battery.voltage()>8000,  "Battery voltage below 8000."
+
+# Print memory usage.
+mem_info()
 
 # Dictionary of device identifiers along with their name.
 DEVICE_NAMES:dict[int,str] = {
