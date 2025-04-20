@@ -25,3 +25,9 @@
 | 300 | 110 |  |
 | 200 | 75 |  |
 | 100 | 40 |  |
+
+# Default Translating of Wall Speeds
+| Lego | PyBricks | Comments |
+| ------- | ------- | -------- |
+| 1000 | 50 | Default speed |
+| 500 | 25 | Default speed |
