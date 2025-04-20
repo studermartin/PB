@@ -4,6 +4,7 @@
 | ------- | -------- | -------- |
 | await ausführen_wand_seitlich(-2) | wall.rightTo(-20) |  |
 | start_wand_seitlich(-0.3) | wall.rightTo(-3, wait=False) | Change distance from cm to mm ; dont't wait |
+| await ausführen_wand_vertikal(0.5) | wall.upTo(5) | Change distance from cm to mm |
 | start_wand_vertikal(6) | wall.upTo(60), wait=False) | Change distance from cm to mm |
 | await warte(100) | wait(100) | |
 | await gyro_fahren(-20, 1050, 90) | drive.drive_to(-90,-200) | Change distance from cm to mm ; angle * -1 |
