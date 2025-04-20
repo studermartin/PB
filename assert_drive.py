@@ -84,8 +84,6 @@ def test_rotate_forward_to_both_directions():
     test_rotate_forward_to(45)
     test_rotate_forward_to(-45)
 
-
-
 test_rotate_forward_to_both_directions()
 test_rotate_backward_to_both_directions()
 test_turn_to()
