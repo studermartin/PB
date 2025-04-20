@@ -7,8 +7,8 @@ from hub import wait_for_button_pressed
 
 drive.turn_to(90)
 drive.turn_to(0)
-drive.drive_to(600,3,straight_speed=300)
-drive.drive_to(-600,3,straight_speed=300)
+drive.drive_to(600,3,speed=300)
+drive.drive_to(-600,3,speed=300)
 
 
 """

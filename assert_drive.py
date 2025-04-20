@@ -1,8 +1,6 @@
 from pybricks.tools import wait
-from pybricks.tools import StopWatch
 from drive import drive
 from hub import hub
-from hub import wait_for_button_pressed
 
 def test_turn_to():
     drive.reset()
@@ -13,7 +11,7 @@ def test_turn_to():
 
     drive.turn_to(0)
     current_angle = drive.angle()
-    assert -3<current_angle<3, f"Expected angle: {0}, current angle:{current_angle}"
+    assert -3<current_angle<3, f"Expected angle: {0} deg, current angle:{current_angle} deg"
 
 
 def test_reset():

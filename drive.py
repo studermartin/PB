@@ -53,19 +53,19 @@ class Drive:
 
     # Source for the PID controller: https://fll-pigeons.github.io/gamechangers/gyro_pid.html (PID program using DriveBase)
     # Added deceleration.
-    def drive_to(self, distance:float, target_angle:float=0.0, straight_speed:float=None, then: Stop = Stop.HOLD):
+    def drive_to(self, distance:float, target_angle:float=0.0, speed:float=None, then: Stop = Stop.HOLD):
         """Drive distance forward/backward to given target angle.
         The target angle should not deviate to much from the current angle. If so consider a turn first. 
 
         Args:
             distance (float): Distance in mm. Positive values to drive foward, negative value to drive backward.
             target_angle (float, optional): Target angle. Defaults to 0.0.
-            straight_speed (float, optional): Straight speed. Defaults to default straight speed.
+            speed (float, optional): Straight speed. Defaults to default straight speed.
             then (Stop, optional): What to do after coming to a standstill. Defaults to Stop.HOLD.
         """
         loop_time = 5  # time per loop in milliseconds        
         target_distance = distance # target distance
-        target_speed = straight_speed if straight_speed is not None else self.get_straight_speed() # target speed of robot in mm/s
+        target_speed = speed if speed is not None else self.get_straight_speed() # target speed of robot in mm/s
         k_p = 5 #  3 # the Constant 'K' for the 'p' proportional controller
 
         integral = 0 # initialize
