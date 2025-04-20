@@ -31,3 +31,4 @@
 | ------- | ------- | -------- |
 | 1000 | 50 | Default speed |
 | 500 | 25 | Default speed |
+| 200 | 10 | Default speed |
