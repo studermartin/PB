@@ -24,7 +24,7 @@ class Wall:
         self.motor_horizontal = Motor(Port.C, Direction.COUNTERCLOCKWISE)
         self.motor_vertical = Motor(Port.D, Direction.COUNTERCLOCKWISE)
         self.left_right_speed_default = 50         # 50 mm/s
-        self.up_down_speed_default = 40               # 40 mm/s
+        self.up_down_speed_default = 80               # mm/s
 
         self.color_sensor = ColorSensor(Port.E)
 

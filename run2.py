@@ -13,36 +13,36 @@ def run2():
     drive.straight_ms(500, -300)
     wait(50)
     wall.upTo(5)
-    drive.drive_to(0, 670)
+    drive.drive_to(670, 0)
     wall.rightTo(-20, wait=False)
     drive.rotate_forward(-89)
     wall.rightTo(-35)
 
     # Anglerfisch 
-    drive.drive_to(-89, 645)
+    drive.drive_to(645, 89)
     wall.rightTo(-20)
 
     # Bodenprobe aufnehmen
-    drive.drive_to(-90, -43)
+    drive.drive_to(-43, 90)
     wall.rightTo(75)
-    drive.drive_to(-90, 170)
+    drive.drive_to(170, 90)
     
     # wait_for_button_pressed()
 
     # Wasserprobe wegschieben 
     wall.rightTo(30)
-    drive.drive_to(-90, 190)####
+    drive.drive_to(190, 90)####
 
     wall.rightTo(-55, wait=False)
 
-    drive.drive_to(-90, 90)
+    drive.drive_to(90, 90)
 
     wall.rightTo(-75)
     wall.rightTo(-55, wait=False)
     wall.upTo(30)
 
     # await gyro_fahren(3.8, 400, 90)
-    drive.drive_to(-90, 38)
+    drive.drive_to(38, 90)
     
     wall.rightTo(-45)
     wall.upTo(5)
@@ -51,7 +51,7 @@ def run2():
     wall.rightTo(45, wait=False)
 
     # await gyro_fahren(17, 1050, 88)#
-    drive.drive_to(-88,170)
+    drive.drive_to(170,88)
     
     wait(100)
 
@@ -63,7 +63,7 @@ def run2():
     wall.upTo(10)
     
     # await gyro_fahren(-20, 1050, 90)
-    drive.drive_to(-90,-200)
+    drive.drive_to(-200,90)
 
     wall.upTo(0, wait=False)
     wall.rightTo(0, wait=False)
@@ -74,12 +74,12 @@ def run2():
     wall.rightTo(30)
 
     # await gyro_fahren(13, 1050, 140)
-    drive.drive_to(-140,130)
+    drive.drive_to(130,140)
     
     wall.rightTo(0)
 
     # await gyro_fahren(57, 1050, 140)
-    drive.drive_to(-140,570)
+    drive.drive_to(570,140)
 
 
 

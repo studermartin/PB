@@ -3,6 +3,15 @@ from pybricks.tools import wait
 from wall import wall
 from hub import hub
 
+
+wall.rightTo(15)
+wall.upTo(50)
+wall.rightTo(35)
+wall.rightTo(50, wait=False)
+wall.upTo(72)
+
+exit()
+
 def print_color():
     while True:
         print(wall.center_reflection())
