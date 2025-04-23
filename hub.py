@@ -9,3 +9,9 @@ def wait_for_button_pressed():
     while not any(pressed):
         pressed = hub.buttons.pressed()
         wait(100)
+
+def beepLow():
+    hub.speaker.beep(440, 100)
+
+def beepHigh():
+    hub.speaker.beep(880, 100)

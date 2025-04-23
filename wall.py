@@ -3,7 +3,7 @@ from pybricks.tools import wait
 from pybricks.pupdevices import Motor, ColorSensor
 from pybricks.parameters import Port, Direction, Color
 
-from fll import beepHigh, beepLow
+from hub import beepHigh, beepLow
 
 # Aus dem Winkel in Grad muss die Strecke berechnet werden.
 # Der Radius des Rades ist 7.5 mm.
