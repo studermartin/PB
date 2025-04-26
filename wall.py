@@ -48,7 +48,10 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to default speed.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_vertical.run_angle(self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        if distance is not None:
+            return self.motor_vertical.run_angle(self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        else:
+            return self.motor_vertical.run(self.get_up_down_angle_speed_or_default(speed))
 
     def upTo(self, offset:float, speed: float=None, wait:bool=True):
         """Move wall up to a given offset.
@@ -68,7 +71,10 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to None.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_vertical.run_angle(-self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        if distance is not None:
+            return self.motor_vertical.run_angle(-self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        else:
+            return self.motor_vertical.run_angle(-self.get_up_down_angle_speed_or_default(speed))
 
     def right_pos(self)->float:
         """The position to the right in mm.
