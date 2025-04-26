@@ -21,8 +21,8 @@ _WALL_HORIZONTAL_BRIGHTNESS_BOUNDARY_BLACK_ORANGE = 15
 class Wall:
 
     def __init__(self):
-        self.motor_horizontal = Motor(Port.C, Direction.COUNTERCLOCKWISE)
-        self.motor_vertical = Motor(Port.D, Direction.COUNTERCLOCKWISE)
+        self.motor_left_right = Motor(Port.C, Direction.COUNTERCLOCKWISE)
+        self.motor_up_down = Motor(Port.D, Direction.COUNTERCLOCKWISE)
         self.left_right_speed_default = 50         # 50 mm/s
         self.up_down_speed_default = 80               # mm/s
 
@@ -37,8 +37,8 @@ class Wall:
         return _UP_DOWN_SPEED*(speed if speed is not None else self.up_down_speed_default)
 
     def reset_pos(self)->None:
-        self.motor_vertical.reset_angle(0)
-        self.motor_horizontal.reset_angle(0)
+        self.motor_up_down.reset_angle(0)
+        self.motor_left_right.reset_angle(0)
 
     def up(self, distance:float, speed: float=None, wait:bool=True):
         """Move wall up a given distance.
@@ -49,9 +49,9 @@ class Wall:
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
         if distance is not None:
-            return self.motor_vertical.run_angle(self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+            return self.motor_up_down.run_angle(self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
         else:
-            return self.motor_vertical.run(self.get_up_down_angle_speed_or_default(speed))
+            return self.motor_up_down.run(self.get_up_down_angle_speed_or_default(speed))
 
     def upTo(self, offset:float, speed: float=None, wait:bool=True):
         """Move wall up to a given offset.
@@ -61,7 +61,7 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to None.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_vertical.run_target(self.get_up_down_angle_speed_or_default(speed), offset/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        return self.motor_up_down.run_target(self.get_up_down_angle_speed_or_default(speed), offset/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
 
     def down(self, distance: float, speed:float=None, wait:bool=True):
         """Move wall down a given distance.
@@ -72,9 +72,9 @@ class Wall:
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
         if distance is not None:
-            return self.motor_vertical.run_angle(-self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+            return self.motor_up_down.run_angle(-self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
         else:
-            return self.motor_vertical.run_angle(-self.get_up_down_angle_speed_or_default(speed))
+            return self.motor_up_down.run_angle(-self.get_up_down_angle_speed_or_default(speed))
 
     def right_pos(self)->float:
         """The position to the right in mm.
@@ -82,7 +82,7 @@ class Wall:
         Returns:
             float: the position to the right in mm.
         """
-        return self.motor_horizontal.angle() * _LEFT_RIGHT_ANGLE2DISTANCE
+        return self.motor_left_right.angle() * _LEFT_RIGHT_ANGLE2DISTANCE
 
     def left_pos(self)->float:
         return -self.right_pos()
@@ -93,7 +93,7 @@ class Wall:
         Returns:
             float: up/down position in mm.
         """
-        return self.motor_vertical.angle() * _UP_DOWN_ANGLE2DISTANCE
+        return self.motor_up_down.angle() * _UP_DOWN_ANGLE2DISTANCE
         
 
     def left(self, distance:float=None, speed: float=None, wait:bool=True):
@@ -105,9 +105,9 @@ class Wall:
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
         if distance is not None:
-            return self.motor_horizontal.run_angle(self.get_left_right_angle_Speed_or_default(speed), distance/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
+            return self.motor_left_right.run_angle(self.get_left_right_angle_Speed_or_default(speed), distance/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
         else:
-            return self.motor_horizontal.run(self.get_left_right_angle_Speed_or_default(speed))
+            return self.motor_left_right.run(self.get_left_right_angle_Speed_or_default(speed))
 
     def leftTo(self, offset:float, speed: float=None, wait:bool=True):
         """Move wall left to a given offset.
@@ -117,25 +117,25 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to None.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_horizontal.run_target(self.get_left_right_angle_Speed_or_default(speed), offset/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
+        return self.motor_left_right.run_target(self.get_left_right_angle_Speed_or_default(speed), offset/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
 
     def right(self, distance:float=None, speed: float=None, wait:bool=True):
         if distance is not None:
-            return self.motor_horizontal.run_angle(-self.get_left_right_angle_Speed_or_default(speed), distance/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
+            return self.motor_left_right.run_angle(-self.get_left_right_angle_Speed_or_default(speed), distance/_LEFT_RIGHT_ANGLE2DISTANCE, wait=wait)
         else:
-            return self.motor_horizontal.run(-self.get_left_right_angle_Speed_or_default(speed))
+            return self.motor_left_right.run(-self.get_left_right_angle_Speed_or_default(speed))
 
     def rightTo(self, distance:float, speed: float=None, wait:bool=True):
         return self.leftTo(-distance, speed=speed, wait=wait)
 
     def stop(self)->None:
-        self.motor_vertical.stop()
-        self.motor_horizontal.stop()
+        self.motor_up_down.stop()
+        self.motor_left_right.stop()
 
     def downToStop(self, speed:float=None)->None:
-        self.motor_vertical.run(-self.get_up_down_angle_speed_or_default(speed))
+        self.motor_up_down.run(-self.get_up_down_angle_speed_or_default(speed))
         
-        while not self.motor_vertical.stalled():
+        while not self.motor_up_down.stalled():
             wait(10)
         self.stop()
 
