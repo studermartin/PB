@@ -4,6 +4,9 @@ from wall import wall
 from hub import hub
 
 
+wall.center()
+wall.downToStop()
+wall.reset_pos()
 wall.rightTo(15)
 wall.upTo(50)
 wall.rightTo(35)
