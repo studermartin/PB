@@ -114,6 +114,17 @@ class Drive:
         # to implement the "then"
         self.drive_base.straight(0,then)         
 
+    def distance(self)->float:
+        """Get the distance in mm (since last reset)
+
+        Returns:
+            float: Distance in mm (since last reset)
+        """
+        return self.drive_base.distance()
+
+    def angle(self)->float:
+        return self.drive_base.angle()
+
     def wait_for_ready():
         pass # while not hub.imu.ready():
             # wait(200)

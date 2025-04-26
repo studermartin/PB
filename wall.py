@@ -70,6 +70,26 @@ class Wall:
         """
         return self.motor_vertical.run_angle(-self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
 
+    def right_pos(self)->float:
+        """The position to the right in mm.
+
+        Returns:
+            float: the position to the right in mm.
+        """
+        return self.motor_horizontal.angle() * _LEFT_RIGHT_ANGLE2DISTANCE
+
+    def left_pos(self)->float:
+        return -self.right_pos()
+
+    def up_pos(self)->float:
+        """The up/down position in mm.
+
+        Returns:
+            float: up/down position in mm.
+        """
+        return self.motor_vertical.angle() * _UP_DOWN_ANGLE2DISTANCE
+        
+
     def left(self, distance:float=None, speed: float=None, wait:bool=True):
         """Move wall a given distance to the left.
 
