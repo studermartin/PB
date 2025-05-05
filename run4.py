@@ -15,19 +15,22 @@ def run4():
     drive.drive_to(555, 0)
     wait(50)
     wall.rightTo(30, wait=False)
+    wall.upTo(50, wait=False)
     drive.rotate_to_forward(-49)
-    wall.upTo(2)    # Wand slll nicht verklemmen
-    wall.upTo(120)
+    wall.upTo(47)    # Wand slll nicht verklemmen
+    wall.upTo(120) 
     drive.drive_to(65, -45-4)
     wall.upTo(35)
     drive.straight_ms(200, 150)
     wall.upTo(0)
     wait(200)
-    wall.upTo(107)
+    wall.upTo(102)
     drive.drive_to(-60, -50)
-    wall.upTo(43, wait=False)
+    wall.upTo(26, wait=False)
     drive.rotate_to_backward(1)
-    wall.rightTo(50, wait=False)
+    wall.rightTo(62, wait=False)
     #wait_for_button_pressed()
-    drive.drive_to(-610, 1)
+    drive.drive_to(-610, 1, speed=450)
+
+run4()
     
