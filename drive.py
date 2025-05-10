@@ -114,6 +114,20 @@ class Drive:
         # to implement the "then"
         self.drive_base.straight(0,then)         
 
+    def arc(self, radius:float, angle:float=None, distance:float=None, then=Stop.HOLD, wait=True):
+        """Drives an arc (a partial circle) with a given radius. You can specify how far to drive using either an angle or a distance.
+        With a positive radius, the robot drives along a circle to its right. With a negative radius, the robot drives along a circle to its left.
+        You can specify how far to travel along that circle as an angle (degrees) or distance (mm). A positive value means driving forward along the circle. Negative means driving in reverse.
+
+        Args:
+            radius (float): Radius of the circle in mm
+            angle (float, optional): Angle to drive along the circle. Defaults to None.
+            distance (float, optional): Distance to drive along the circle, measured at the center of the robot. Defaults to None.
+            then (Stop, optional): What to do after coming to a standstill.. Defaults to Stop.HOLD.
+            wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program.. Defaults to True.
+        """
+        return self.drive_base.arc(radius, angle=angle, distance=distance, then=then, wait=wait)
+
     def distance(self)->float:
         """Get the distance in mm (since last reset)
 
