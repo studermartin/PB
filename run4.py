@@ -6,9 +6,9 @@ from wall import wall
 
 def run4():
 
-    wall.upTo(5)#nur bei run 4 einzeln
-    wall.rightTo(55)#nur bei run 4 einzeln
-    wait_for_button_pressed()#nur bei run 4 einzeln
+    #wall.upTo(5)#nur bei run 4 einzeln
+    #wall.rightTo(55)#nur bei run 4 einzeln
+    #wait_for_button_pressed()#nur bei run 4 einzeln
 
     wall.rightTo(-20, speed=100)
     wall.rightTo(20, speed=200)
@@ -31,6 +31,4 @@ def run4():
     wall.rightTo(62, wait=False)
     #wait_for_button_pressed()
     drive.drive_to(-610, 1, speed=450)
-
-run4()
-    
+    drive.stop()
