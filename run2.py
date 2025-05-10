@@ -15,7 +15,7 @@ def run2():
     wall.upTo(5)
     drive.drive_to(307, 0)
     wall.rightTo(-47, wait=False)
-    drive.drive_base.arc(-440, angle=90)
+    drive.arc(-440, angle=90)
 
     # Anglerfisch
     drive.drive_to(280, -90)
@@ -51,6 +51,4 @@ def run2():
     drive.drive_to(130, -158)
     wall.rightTo(0)
     drive.drive_to(560, -158)
-
-
-run2()
+    drive.stop()

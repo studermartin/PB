@@ -26,5 +26,4 @@ def run1():
     wall.rightTo(0, speed=150, wait=False)
     # drive.drive_base.arc(-350, distance=-270)
     drive.arc(-350, distance=-270)
-
-run1()
+    drive.stop()
