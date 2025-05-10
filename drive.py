@@ -7,6 +7,9 @@ from hub import hub, wait
 _PROFILE = None # values from 5 (smallest values for the motors used) up to at least 100 (https://docs.pybricks.com/en/stable/pupdevices/motor.html)
 _AXLE_TRACK = 140
 
+def tuple_or_value(first, second)->tuple:
+    return (first, second) if first != second else first
+
 class Drive:
     def __init__(self):
         # https://github.com/pybricks/support/issues/1840
@@ -22,6 +25,44 @@ class Drive:
         self.drive_base.use_gyro(True)
         self.drive_base.settings(turn_rate=40)
         self.drive_base.settings(straight_speed=400)
+
+        self.acceleration_decelerations=[]
+
+    def get_acceleration_deceleration(self):
+        """Get currenct acceleration/deceleration value(s)
+
+        Returns:
+            number or tupple: the acceleration/deceleration value(s) in mm/s^2
+        """
+        return self.drive_base.settings()[1]
+    
+    
+    def set_acceleration_deceleration(self, acceleration:float=None, deceleration:float=None):
+        """Set acceleration and/or deceleration speed
+
+        Args:
+            acceleration (float, optional): _description_. Defaults to None.
+            deceleration (float, optional): _description_. Defaults to None.
+        """
+        straight_acceleration_deceleration = self.drive_base.settings()[1]
+        
+        # make tupple
+        if not isinstance(straight_acceleration_deceleration, tuple):
+            straight_acceleration_deceleration = (straight_acceleration_deceleration,straight_acceleration_deceleration)
+        straight_acceleration_deceleration = (acceleration if acceleration is not None else straight_acceleration_deceleration[0],
+             deceleration if deceleration is not None else straight_acceleration_deceleration[1])
+        
+        self.drive_base.settings(straight_acceleration=straight_acceleration_deceleration)
+
+    def push_and_set_acceleration_deceleration(self, acceleration:float=None, deceleration:float=None)->None:
+        self.acceleration_decelerations.append(self.get_acceleration_deceleration())
+        self.set_acceleration_deceleration(acceleration, deceleration)
+
+    def pop_and_set_acceleration_deceleration(self)->tuple:
+        assert len(self.acceleration_decelerations)>0
+        acceleration_deceleration = self.acceleration_decelerations.pop()
+        self.drive_base.settings(straight_acceleration=acceleration_deceleration)
+        return acceleration_deceleration
 
     def get_straight_speed(self)->float:
         """Get straight speed

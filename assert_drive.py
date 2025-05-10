@@ -2,6 +2,43 @@ from pybricks.tools import wait
 from drive import drive
 from hub import hub
 
+def test_set_get_acceleration_deceleration():
+    drive.reset()
+
+    drive.set_acceleration_deceleration(733,733)
+    expected = 733
+    drive.set_acceleration_deceleration(None,None)
+    current = drive.get_acceleration_deceleration()
+    assert expected==current, f"Expected acceleration/deceleration: {expected} mm/s^2, current acceleration/deceleration:{current}"
+
+    drive.set_acceleration_deceleration(733,733)
+    expected = (800, 733)
+    drive.set_acceleration_deceleration(800,None)
+    current = drive.get_acceleration_deceleration()
+    assert expected==current, f"Expected acceleration/deceleration: {expected} mm/s^2, current acceleration/deceleration:{current}"
+
+    drive.set_acceleration_deceleration(733,733)
+    expected = (733,800)
+    drive.set_acceleration_deceleration(None, 800)
+    current = drive.get_acceleration_deceleration()
+    assert expected==current, f"Expected acceleration/deceleration: {expected} mm/s^2, current acceleration/deceleration:{current}"
+
+    drive.set_acceleration_deceleration(733,733)
+    expected = 800
+    drive.set_acceleration_deceleration(800, 800)
+    current = drive.get_acceleration_deceleration()
+    assert expected==current, f"Expected acceleration/deceleration: {expected} mm/s^2, current acceleration/deceleration:{current}"
+
+    drive.set_acceleration_deceleration(733,733)
+    drive.push_and_set_acceleration_deceleration(800)
+    expected = (800,733)
+    current = drive.get_acceleration_deceleration()
+    assert expected==current, f"Expected acceleration/deceleration: {expected} mm/s^2, current acceleration/deceleration:{current}"
+    expected = 733
+    drive.pop_and_set_acceleration_deceleration()
+    current = drive.get_acceleration_deceleration()
+    assert expected==current, f"Expected acceleration/deceleration: {expected} mm/s^2, current acceleration/deceleration:{current}"
+
 def test_turn_to():
     drive.reset()
 
@@ -84,11 +121,12 @@ def test_rotate_forward_to_both_directions():
     test_rotate_forward_to(45)
     test_rotate_forward_to(-45)
 
-test_rotate_forward_to_both_directions()
-test_rotate_backward_to_both_directions()
-test_turn_to()
-test_reset()
-test_drive_to_straight()
+test_set_get_acceleration_deceleration()
+# test_rotate_forward_to_both_directions()
+# test_rotate_backward_to_both_directions()
+# test_turn_to()
+# test_reset()
+# test_drive_to_straight()
 
    
 

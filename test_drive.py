@@ -2,7 +2,6 @@ from pybricks.tools import wait
 from pybricks.tools import StopWatch
 from drive import drive
 from hub import hub
-from wall import wall
 from hub import wait_for_button_pressed
 
 
@@ -11,8 +10,14 @@ from hub import wait_for_button_pressed
 #drive.drive_to(600,3,speed=300)
 #drive.drive_to(-600,3,speed=300)
 
-wall.upTo(50, wait=False)
-drive.drive_to(50, 0, speed=160)
+print(drive.get_acceleration_deceleration())
+drive.set_acceleration_deceleration(800, 800)
+print(drive.get_acceleration_deceleration())
+drive.set_acceleration_deceleration(800, 800)
+
+# drive.drive_to(200, 0, speed=160)
+
+
 
 """
 # wait(2000)
