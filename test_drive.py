@@ -1,19 +1,23 @@
-from pybricks.tools import wait
-from pybricks.tools import StopWatch
 from drive import drive
-from hub import hub
 from hub import wait_for_button_pressed
 
+wait_for_button_pressed()
+drive.straight(100, straight_acceleration=40)
+wait_for_button_pressed()
+drive.straight(100)
+wait_for_button_pressed()
+drive.straight(100, straight_acceleration=9000)
+# drive, drive_to, straight_ms, straight
 
 #drive.turn_to(90)
 #drive.turn_to(0)
 #drive.drive_to(600,3,speed=300)
 #drive.drive_to(-600,3,speed=300)
 
-print(drive.get_acceleration_deceleration())
-drive.set_acceleration_deceleration(800, 800)
-print(drive.get_acceleration_deceleration())
-drive.set_acceleration_deceleration(800, 800)
+# print(drive.get_acceleration_deceleration())
+# drive.set_acceleration_deceleration(800, 800)
+# print(drive.get_acceleration_deceleration())
+# drive.set_acceleration_deceleration(800, 800)
 
 # drive.drive_to(200, 0, speed=160)
 
