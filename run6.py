@@ -4,9 +4,46 @@ from hub import wait_for_button_pressed
 from wall import wall
 
 def run6():
-    wall.upTo(80, wait=False)
-    drive.drive_to(680, 0)
+    #wall.upTo(30, speed=200)#nur bei run 6 alleine
+    #wait_for_button_pressed()#nur bei run 6 alleine
+
+    wall.upTo(28)
+    wall.upTo(100, wait=False)
+    drive.drive_to(720, 0)
+    drive.rotate_to_forward(44)
+    #wait_for_button_pressed()
+    wall.upTo(50, speed=400, wait=False)
+    drive.drive_to(100, 44, speed=200)
+    drive.straight_ms(500)
+    wait(200)
+    #wait_for_button_pressed()
+    drive.drive_to(-115, 43, speed=100)
+    #wait_for_button_pressed()
+    wall.upTo(0, speed=400)
+    #drive.drive_to(-35, 43, speed=100)
+    drive.drive_to(-53, 43, speed=100)
+    #wait_for_button_pressed()
+    wall.rightTo(30, 400)
+    wall.upTo(50)
+    wall.rightTo(60)
+    wall.upTo(105)
+    wall.rightTo(40)
+    #wait_for_button_pressed()
+    drive.rotate_to_backward(0)
+    drive.drive_to(10, 0)
+    wall.rightTo(70, wait=False)
+    drive.rotate_to_forward(-90)
+    wall.upTo(40, speed=300, wait=False)
+    drive.drive_to(30, -90)
+    wall.upTo(18)
+    drive.drive_to(-30, -90)
+    wall.rightTo(10)
     wait_for_button_pressed()
+
+
+
+
+
 
     drive.rotate_to_backward(42)
     drive.drive_to(130, 44)

@@ -6,7 +6,7 @@
             "type": "debugpy",
             "request": "launch",
             "module": "pybricksdev",
-            "args": ["run", "-nFluffy 1", "ble", "${file}"], 
+            "args": ["run", "-nFluffy 3", "ble", "${file}"], 
         }
     ]
 } 

@@ -19,6 +19,7 @@ def run2():
 
     # Anglerfisch
     drive.drive_to(280, -90)
+    drive.drive_to(-10, -90)
 
     # Meeresbodenprobe
     wall.rightTo(65, speed=300)
@@ -35,20 +36,20 @@ def run2():
 
     #Krill einsammeln
     wall.upTo(5, wait=False)
-    wall.rightTo(40, speed=400)
+    wall.rightTo(35, speed=400)#40
     drive.drive_to(150, -90)
     drive.straight_ms(300, speed=150)
 
     # Taucher einsammeln, Haifisch freilassen, Korallenknospen aufstellen
     wall.upTo(35)
-    drive.drive_to(-8, -90, speed=150)
+    drive.drive_to(-10, -90, speed=150)
     wall.upTo(0)
 
     # Zurückfahren
     drive.drive_to(-140, -90)
     wall.rightTo(55, speed=400, wait=False)
     drive.rotate_to_backward(-158)
-    drive.drive_to(130, -158)
-    wall.rightTo(0)
-    drive.drive_to(560, -158)
+    drive.drive_to(80, -158, speed=100)
+    wall.rightTo(0, wait=False)
+    drive.drive_to(610, -158)
     drive.stop()
