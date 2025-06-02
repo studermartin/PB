@@ -4,7 +4,7 @@ from hub import wait_for_button_pressed
 from wall import wall
 
 def run5():
-    wall.upTo(35)#nur bei run 5 einzeln
+    wall.upTo(40)#nur bei run 5 einzeln
     wall.rightTo(62)#nur bei run 5 einzeln
     wait_for_button_pressed()#nur bei run 5 einzeln
 
@@ -16,6 +16,7 @@ def run5():
     wall.upTo(90)
     #wait_for_button_pressed()
     drive.drive_to(-260, 0, speed=500, straight_acceleration=9700)
+    wait_for_button_pressed()
     wall.rightTo(0, wait=False)
     drive.rotate_to_forward(-14)
     drive.drive_to(425, -14)

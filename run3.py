@@ -4,7 +4,7 @@ from hub import wait_for_button_pressed
 from wall import wall
 
 def run3():
-    wall.rightTo(-2, wait=False)
+    wall.rightTo(-1.7, wait=False)
     drive.drive_to(415,0)
     wall.upTo(35)
     wait(50)
@@ -28,10 +28,10 @@ def run3():
     drive.rotate_to_backward(90)
     wall.upTo(0, wait=False)
     drive.drive_to(50, 90, speed=300)
-    drive.drive_to(165, 90, speed=300)
-    wall.rightTo(-5)
-    wall.rightTo(2)
-    wall.rightTo(0)
+    drive.drive_to(160, 90, speed=300)
+    #wall.rightTo(-5)
+    #wall.rightTo(2)
+    #wall.rightTo(0)
     drive.drive_to(-125,90, speed=190)
     drive.rotate_to_backward(35)
     wall.upTo(5, wait=False)
