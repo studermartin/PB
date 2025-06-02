@@ -6,9 +6,9 @@ from wall import wall
 
 def run4():
 
-    wall.upTo(5)#nur bei run 4 einzeln
-    wall.rightTo(55)#nur bei run 4 einzeln
-    wait_for_button_pressed()#nur bei run 4 einzeln
+    #wall.upTo(5)#nur bei run 4 einzeln
+    #wall.rightTo(55)#nur bei run 4 einzeln
+    #wait_for_button_pressed()#nur bei run 4 einzeln
 
     wall.rightTo(-20, speed=100)
     wall.rightTo(20, speed=200)
