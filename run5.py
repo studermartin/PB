@@ -4,7 +4,7 @@ from hub import wait_for_button_pressed
 from wall import wall
 
 def run5():
-    wall.upTo(26)#nur bei run 5 einzeln
+    wall.upTo(35)#nur bei run 5 einzeln
     wall.rightTo(62)#nur bei run 5 einzeln
     wait_for_button_pressed()#nur bei run 5 einzeln
 
