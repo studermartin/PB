@@ -3,6 +3,9 @@ from pybricks.tools import wait
 from wall import wall
 from hub import hub
 
+wall.upTo(100)
+wait(10000000)
+
 
 wall.center()
 wall.downToStop()
