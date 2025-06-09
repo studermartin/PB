@@ -63,6 +63,15 @@ class Wall:
         """
         return self.motor_up_down.run_target(self.get_up_down_angle_speed_or_default(speed), self._to_angle(offset), wait=wait)
 
+    def upToWithRelease(self, offset:float, speed: float=None, wait:bool=True):
+        assert wait
+
+        # if going up first go down 5 mm to release the wall
+        if offset > self.up_pos():
+            self.upTo(self.up_pos()-5, speed=speed, wait=wait)
+
+        return self.motor_up_down.run_target(self.get_up_down_angle_speed_or_default(speed), self._to_angle(offset), wait=wait)
+
     def down(self, distance: float, speed:float=None, wait:bool=True):
         """Move wall down a given distance.
 
