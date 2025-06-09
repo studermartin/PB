@@ -13,9 +13,6 @@ def tuple_or_value(first, second)->tuple:
 
 class Drive:
     def __init__(self):
-        # https://github.com/pybricks/support/issues/1840
-        hub.imu.settings(angular_velocity_threshold=1, acceleration_threshold=1000)
-
         # hub.imu.settings(heading_correction=361) # only available in latest build
 
         self.left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE, profile=_PROFILE)
