@@ -1,12 +1,15 @@
 from drive import drive
 from hub import wait_for_button_pressed
+from hub import beepLow
 
 wait_for_button_pressed()
-drive.straight(100, straight_acceleration=40)
-wait_for_button_pressed()
-drive.straight(100)
-wait_for_button_pressed()
-drive.straight(100, straight_acceleration=9000)
+drive.drive_to(100)
+beepLow()
+
+# wait_for_button_pressed()
+# drive.straight(100)
+# wait_for_button_pressed()
+# drive.straight(100, straight_acceleration=9000)
 # drive, drive_to, straight_ms, straight
 
 #drive.turn_to(90)
