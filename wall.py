@@ -49,7 +49,7 @@ class Wall:
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
         if distance is not None:
-            return self.motor_up_down.run_angle(self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+            return self.motor_up_down.run_angle(self.get_up_down_angle_speed_or_default(speed), self._to_angle(distance), wait=wait)
         else:
             return self.motor_up_down.run(self.get_up_down_angle_speed_or_default(speed))
 
@@ -61,7 +61,7 @@ class Wall:
             speed (float, optional): Speed of the wall in mm/s. Defaults to None.
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
-        return self.motor_up_down.run_target(self.get_up_down_angle_speed_or_default(speed), offset/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+        return self.motor_up_down.run_target(self.get_up_down_angle_speed_or_default(speed), self._to_angle(offset), wait=wait)
 
     def down(self, distance: float, speed:float=None, wait:bool=True):
         """Move wall down a given distance.
@@ -72,7 +72,7 @@ class Wall:
             wait (bool, optional): Wait for the maneuver to complete before continuing with the rest of the program. Defaults to True.
         """
         if distance is not None:
-            return self.motor_up_down.run_angle(-self.get_up_down_angle_speed_or_default(speed), distance/_UP_DOWN_ANGLE2DISTANCE, wait=wait)
+            return self.motor_up_down.run_angle(-self.get_up_down_angle_speed_or_default(speed), self._to_angle(distance), wait=wait)
         else:
             return self.motor_up_down.run_angle(-self.get_up_down_angle_speed_or_default(speed))
 
@@ -200,5 +200,9 @@ class Wall:
         beepLow()
         if DEBUG:
             print("Ende: wand_horizontal_ausrichten_neu")
+
+    def _to_angle(self, distance: float) -> float:
+        """Convert distance in mm to angle in degrees."""
+        return distance / _UP_DOWN_ANGLE2DISTANCE
 
 wall = Wall()

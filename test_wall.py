@@ -3,7 +3,7 @@ from pybricks.tools import wait
 from wall import wall
 from hub import hub
 
-wall.upTo(100)
+wall.upTo(50)
 wait(10000000)
 
 
