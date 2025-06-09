@@ -1,10 +1,29 @@
+from pybricks.tools import wait
+from pybricks.parameters import Axis, Stop
 from drive import drive
 from hub import wait_for_button_pressed
-from hub import beepLow
+from hub import beepLow, hub
+
+hub.imu.settings(angular_velocity_threshold=10, acceleration_threshold=1000)
+drive.turn_to(0, then=Stop.HOLD)
+drive.stop()
+while True:
+    if not hub.imu.ready():
+        print("Ready", hub.imu.ready())
+    print(drive.angle())
+    # print("Stationary:", hub.imu.stationary())
+    # print("imu.acceleration:", hub.imu.acceleration(Axis.Z, calibrated=True), "angular_velocity:", hub.imu.angular_velocity(None, calibrated=True))
+    wait(1000) 
+
 
 wait_for_button_pressed()
-drive.drive_to(100)
-beepLow()
+drive.turn_to(0)
+while True:
+    print(drive.angle())
+    print(not hub.imu.ready())
+    wait(1000)
+wait_for_button_pressed()
+
 
 # wait_for_button_pressed()
 # drive.straight(100)
