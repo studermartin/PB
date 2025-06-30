@@ -44,7 +44,8 @@ def run2():
     drive.straight_ms(300, speed=150)
 
     # Taucher einsammeln, Haifisch freilassen, Korallenknospen aufstellen
-    wall.upTo(35)
+    wall.upTo(35, wait=False)
+    wait(1000)
     drive.drive_to(-10, -90, speed=150)
     wall.upTo(0)
 

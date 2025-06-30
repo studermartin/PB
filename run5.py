@@ -24,8 +24,10 @@ def run5():
     wall.upTo(80, wait=False)
     wall.rightTo(0, wait=False)
     wall.upTo(40, wait=False)
+    drive.drive_base.use_gyro(False)
     drive.drive_to(750, 15, speed=500)
-    
+    drive.drive_base.use_gyro(True)
+
     drive.stop()
 
     
