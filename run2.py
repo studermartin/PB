@@ -12,12 +12,13 @@ def run2():
     wall.rightTo(7)
     drive.straight_ms(500, -300)
     wait(50)
-    wall.upTo(5)
+    wall.upTo(45, speed=400, wait=False)
     drive.drive_to(307, 0)
     wall.rightTo(-47, wait=False)
     drive.arc(-440, angle=90)
 
     # Anglerfisch
+    wall.upTo(5, speed=400, wait=False)
     drive.drive_to(280, -90)
     drive.drive_to(-10, -90)
 
@@ -38,6 +39,8 @@ def run2():
     wall.upTo(5, wait=False)
     wall.rightTo(35, speed=400)#40
     drive.drive_to(150, -90)
+    #wait(30)
+    #wall.upTo(10, speed=75, wait=False)
     drive.straight_ms(300, speed=150)
 
     # Taucher einsammeln, Haifisch freilassen, Korallenknospen aufstellen
