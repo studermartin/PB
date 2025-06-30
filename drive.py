@@ -2,7 +2,7 @@ from umath import sqrt, fabs, copysign
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Port, Direction, Stop
 from pybricks.robotics import DriveBase
-from hub import hub, wait
+from hub import beepLow, hub, wait
 
 _PROFILE = None # values from 5 (smallest values for the motors used) up to at least 100 (https://docs.pybricks.com/en/stable/pupdevices/motor.html)
 _AXLE_TRACK = 140
@@ -13,9 +13,6 @@ def tuple_or_value(first, second)->tuple:
 
 class Drive:
     def __init__(self):
-        # https://github.com/pybricks/support/issues/1840
-        hub.imu.settings(angular_velocity_threshold=1, acceleration_threshold=1000)
-
         # hub.imu.settings(heading_correction=361) # only available in latest build
 
         self.left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE, profile=_PROFILE)
@@ -94,7 +91,7 @@ class Drive:
 
     # Source for the PID controller: https://fll-pigeons.github.io/gamechangers/gyro_pid.html (PID program using DriveBase)
     # Added deceleration.
-    def drive_to(self, distance:float, target_angle:float=0.0, speed:float=None, then: Stop = Stop.HOLD, straight_acceleration:float=None):
+    def drive_to(self, distance:float, target_angle:float=0.0, speed:float=None, then: Stop = Stop.HOLD, straight_acceleration:float=None, abort_when_stalled: bool= True):
         """Drive distance forward/backward to given target angle.
         The target angle should not deviate to much from the current angle. If so consider a turn first. 
 
@@ -154,6 +151,10 @@ class Drive:
             delta_from_start = self.drive_base.distance()-start_distance
             delta_distance = fabs(target_distance)-fabs(delta_from_start)
             # print("Target distance: ", target_distance, "; Start distance: ", start_distance, "; Delta distance from start: ", delta_from_start, "; Delta distance to target", delta_distance)
+        
+            if abort_when_stalled and self.drive_base.stalled():
+                beepLow()
+                break
 
         # to implement the "then"
         self.drive_base.straight(0,then)

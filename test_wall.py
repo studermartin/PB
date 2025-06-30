@@ -1,9 +1,11 @@
 from pybricks.tools import wait
 
 from wall import wall
-from hub import hub
+from hub import hub, wait_for_button_pressed
 
-wall.upTo(100)
+wall.upTo(50)
+wait_for_button_pressed()
+wall.upToWithRelease(70)
 wait(10000000)
 
 
