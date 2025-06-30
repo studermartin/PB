@@ -5,11 +5,11 @@ from pybricks.tools import wait
 
 hub = PrimeHub(top_side=Axis.Z, front_side=Axis.Y)
 
-_force_sensor = ForceSensor(Port.F)
+force_sensor = ForceSensor(Port.F)
 
 def wait_for_button_pressed():
     pressed = []
-    while not any(pressed) and not _force_sensor.pressed():
+    while not any(pressed) and not force_sensor.pressed():
         pressed = hub.buttons.pressed()
         wait(100)
     beepHigh()
